@@ -1,0 +1,56 @@
+[
+	{
+		"name": "Radio FG",
+		"logo": "http://www.radiofg.com/upload/design/598c2af5081d74.63866449.png",
+		"stream": {
+			"url": "http://radiofg.impek.com/fg",
+			"format": "mp3"
+		},
+		"recording": false,
+		"offset": 0,
+		"songInfo": {
+			"method": "http",
+			"url": "https://api.radioking.com/radio/accounts/getcurrenttitle?app=radiofg&apikey=7cfde934f1cee6fdac926f92baadbb9fb6852f14&idsite=5079&typetitrage=web&idserveur=8&username=&host=radiofg.impek.com&port=80&radiouid=&mount=fg&url=http://radiofg.impek.com/fg",
+			"tags": {
+				"artist": "/results/title",
+				"title": "/results/artist"
+			}
+		}
+	},
+	{
+		"name": "Hit Radio FFH",
+		"logo": "https://static.ffh.de/fileadmin/templates/www.ffh.de/images/logo.png",
+		"stream": {
+			"url": "http://mp3.ffh.de/fs_radioffh/hqlivestream.mp3",
+			"format": "mp3"
+		},
+		"recording": false,
+		"offset": 0,
+		"songInfo": {
+			"method": "http",
+			"url": "https://webradio.ffh.de/custom/getStationSonginfos.php?station=ffh",
+			"tags": {
+				"artist": "/current/artist",
+				"title": "/current/title"
+			}
+		}
+	},
+	{
+		"name": "Planet Radio",
+		"logo": "https://static.planetradio.de/fileadmin/templates/www.planetradio.de/images/logo.png",
+		"stream": {
+			"url": "http://mp3.planetradio.de/fs_planetradio/hqlivestream.mp3",
+			"format": "mp3"
+		},
+		"recording": false,
+		"offset": 0,
+		"songInfo": {
+			"method": "http",
+			"url": "https://webradio.planetradio.de/custom/getStationSonginfos.php?station=planet",
+			"tags": {
+				"artist": "/current/artist",
+				"title": "/current/title"
+			}
+		}
+	}
+]

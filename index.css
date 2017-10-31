@@ -1,0 +1,125 @@
+html, body {
+	margin: 0;
+	padding: 0;
+	font-family: 'Rajdhani', sans-serif;
+	font-size: 15pt;
+}
+
+[v-cloak] { 
+	display: none; 
+}
+
+button {
+	border: none;
+	background-color: steelblue;
+	color: white;
+	font-family: 'Rajdhani', sans-serif;
+	font-size: 14pt;
+}
+
+button:disabled {
+	background-color: gray;
+}
+
+div.player-box {
+	position: fixed;
+	width: 100%;
+	height: 70px;
+	top: 0;
+	left: 0;
+	background-color: deepskyblue;
+}
+
+div.current-track-box {
+	float: left;
+	line-height: 25px;
+	vertical-align: middle;
+	margin: 10px;
+}
+
+div.player-buttons {
+	float: right;
+	line-height: 70px;
+	vertical-align: middle;	
+}
+
+span.selected-station-info {
+	margin-right: 20px;
+}
+
+input[type=range] {
+	display: block;
+	float: right;
+	width: 80px;
+	height: 30px;
+	margin: 20px;
+	padding: 0;
+}
+
+div.station-picker {
+	position: fixed;
+	width: 100%;
+	height: 80px;
+	top: 70px;
+	left: 0;
+	display: flex;
+	flex-flow: row nowrap;
+	overflow-x: auto;
+	background-color: lightskyblue;
+}
+
+div.station-picker::before, div.station-picker::after {
+	margin: auto;
+	content: '';
+}
+
+div.station-box {
+	flex-shrink: 0;
+	margin: 10px;
+	padding: 10px;
+}
+
+div.station-box.selected {
+	padding: 8px;
+	border: 2px solid gray;
+}
+
+img.logo {
+	height: 40px;
+}
+
+img.logo.inactive {
+	filter: grayscale(1);
+}
+
+div.track-list-area {
+	width: 100%;
+	margin-top: 150px;
+}
+
+table.track-list {
+	width: 100%;
+	border-spacing: 0;
+}
+
+table.track-list thead tr {
+	background-color: steelblue;
+}
+
+table.track-list tbody tr:nth-child(2n) {
+	background-color: lightblue;
+}
+
+table.track-list tbody tr:nth-child(2n+1) {
+	background-color: lightsteelblue;
+}
+
+table.track-list th, table.track-list td {
+	padding: 2px 5px;
+	text-align: left;
+}
+
+div.message {
+	padding: 20px;
+	font-weight: bold;
+}

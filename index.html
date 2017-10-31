@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  
+<head>
+    <meta charset="UTF-8">
+	<title>RadioGrab</title>
+	<link href="https://fonts.googleapis.com/css?family=Rajdhani" rel="stylesheet">
+	<link rel="stylesheet" href="./index.css">
+	<script>
+		window.onload = function(){
+			require('./index.js');
+		}
+	</script>
+</head>
+
+<body>
+	<div id="app" v-cloak>
+
+		<div class="player-box">
+			<div class="current-track-box" v-if="currentTrack">
+				{{currentTrack.artist}} 
+				<br> 
+				{{currentTrack.title}}
+			</div>
+			<div class="player-buttons">
+				<span class="selected-station-info" v-if="selectedStation">
+					{{selectedStation.name}}
+				</span>
+				<span v-if="selectedStation">
+					<button @click="selectedStation.recorder.record()" 
+							v-if="!selectedStation.recording">
+						Record
+					</button>
+					<button @click="selectedStation.recorder.stop()" 
+							v-if="selectedStation.recording">
+						Stop
+					</button>
+				</span>
+				<button @click="live" :disabled="!isLivePossible">Live</button>
+				<button @click="audioPlayer.pause()" :disabled="!audioPlayer.isPlaying">Pause</button>
+				<button @click="audioPlayer.continue()" :disabled="!audioPlayer.isPaused">Play</button>
+				<input type="range" min="0" max="100" v-model="audioPlayer.volume">
+			</div>
+		</div>
+
+		<div class="station-picker">
+			<div class="station-box" v-for="station in stations" 
+				 :class="{selected: selectedStation === station}">
+				<img class="logo" :src="station.logo" 
+					 :class="{inactive: !station.recording}"
+					 @click="selectStation(station)">
+				<br>
+				
+			</div>
+		</div>
+				
+		<div class="track-list-area" v-if="selectedStation">
+			<table class="track-list" v-if="tracks && tracks.length">
+				<thead>
+					<tr>
+						<th>Artist</th>
+						<th>Title</th>
+						<th>Length</th>
+						<th>Time</th>
+						<th>Search</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for="track in tracks" 
+						class="track"
+						:class="{incomplete: !track.complete}"
+						@click="selectTrackAndPlay(track)">
+						<td>{{track.artist}}</td>
+						<td>{{track.title}}</td>
+						<td>{{formatLength(track.length)}}</td>
+						<td>{{track.time}}</td>
+						<td>
+							<a href="#" @click.stop="searchOnGoogle(track)"> Google </a>
+							<a href="#" @click.stop="searchOnYouTube(track)"> YouTube </a>
+						</td>
+						<td><a href="#" class="btn" @click.stop="saveTrack(track)">Save</a></td>
+					</tr>
+				</tbody>
+			</table>
+			<div v-else>
+				<div class="message">
+					There are no tracks yet. 
+					Record the station for a while and this list will be filled soon.
+				</div>
+			</div>
+		</div>
+		<div v-else>
+			<div class="message">
+				Select a station!
+			</div>
+		</div>
+
+		<div class="track-edit-overlay"></div>
+		<div class="station-edit-overlay"></div>
+		<div class="settings-overlay"></div>
+		
+	</div>
+</body>
+	
+
+</html>
