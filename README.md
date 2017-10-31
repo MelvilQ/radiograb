@@ -26,6 +26,6 @@ TODO
 
 1. Clone this repo.
 2. Run `yarn install`.
-3. Make sure that [FFmpeg].(https://www.ffmpeg.org/download.html) is installed on your computer and in your PATH.
+3. Make sure that [FFmpeg](https://www.ffmpeg.org/download.html) is installed on your computer and in your PATH.
 4. `npm start` starts the app in development mode.
 5. `npm buildall` builds executables for all platforms supported by electron.
