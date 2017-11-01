@@ -26,6 +26,11 @@
 				<span class="selected-station-info" v-if="selectedStation">
 					{{selectedStation.name}}
 				</span>
+				<input type="text" 
+					   placeholder="Search"
+					   class="search-term-input" 
+					   v-model="searchTerm" 
+					   v-if="selectedStation">
 				<span v-if="selectedStation">
 					<button @click="selectedStation.recorder.record()" 
 							v-if="!selectedStation.recording">
@@ -48,45 +53,67 @@
 				 :class="{selected: selectedStation === station}">
 				<img class="logo" :src="station.logo" 
 					 :class="{inactive: !station.recording}"
-					 @click="selectStation(station)">
-				<br>
-				
+					 @click="selectStation(station)">				
 			</div>
 		</div>
 				
 		<div class="track-list-area" v-if="selectedStation">
-			<table class="track-list" v-if="tracks && tracks.length">
-				<thead>
+			<div v-if="tracks && tracks.length">
+				<table class="track-list-head">
 					<tr>
-						<th>Artist</th>
-						<th>Title</th>
-						<th>Length</th>
-						<th>Time</th>
-						<th>Search</th>
-						<th>Action</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr v-for="track in tracks" 
-						class="track"
-						:class="{incomplete: !track.complete}"
-						@click="selectTrackAndPlay(track)">
-						<td>{{track.artist}}</td>
-						<td>{{track.title}}</td>
-						<td>{{formatLength(track.length)}}</td>
-						<td>{{track.time}}</td>
-						<td>
-							<a href="#" @click.stop="searchOnGoogle(track)"> Google </a>
-							<a href="#" @click.stop="searchOnYouTube(track)"> YouTube </a>
+						<td class="artist-column" @click="changeSorting('artist')">
+							Artist
+							<span v-if="sortColumn === 'artist' && sortOrder === 'asc'">&#x25B2;</span>
+							<span v-if="sortColumn === 'artist' && sortOrder === 'desc'">&#x25BC;</span>
 						</td>
-						<td><a href="#" class="btn" @click.stop="saveTrack(track)">Save</a></td>
+						<td class="title-column" @click="changeSorting('title')">
+							Title
+							<span v-if="sortColumn === 'title' && sortOrder === 'asc'">&#x25B2;</span>
+							<span v-if="sortColumn === 'title' && sortOrder === 'desc'">&#x25BC;</span>
+						</td>
+						<td class="length-column" @click="changeSorting('length')">
+							Length
+							<span v-if="sortColumn === 'length' && sortOrder === 'asc'">&#x25B2;</span>
+							<span v-if="sortColumn === 'length' && sortOrder === 'desc'">&#x25BC;</span>
+						</td>
+						<td class="time-column" @click="changeSorting('time')">
+							Time
+							<span v-if="sortColumn === 'time' && sortOrder === 'asc'">&#x25B2;</span>
+							<span v-if="sortColumn === 'time' && sortOrder === 'desc'">&#x25BC;</span>
+						</td>
+						<td class="action-column"></td>
 					</tr>
-				</tbody>
-			</table>
-			<div v-else>
+				</table>
+				<table class="track-list-body">
+					<tr v-for="track in tracks" 
+						@click="selectTrackAndPlay(track)">
+						<td class="artist-column">{{track.artist}}</td>
+						<td class="title-column">{{track.title}}</td>
+						<td class="length-column">{{formatLength(track.length)}}</td>
+						<td class="time-column">{{track.time}}</td>
+						<td class="action-column">
+							<img class="symbol"
+								@click.stop="searchOnGoogle(track)"
+								src="http://logok.org/wp-content/uploads/2015/09/Google-logo-2015-G-icon-640x480.png">
+						    <img class="symbol"
+								@click.stop="searchOnGoogle(track)"
+								src="http://logok.org/wp-content/uploads/2014/08/Youtube-logo-2017-640x480.png">
+							<img class="symbol"
+								 @click.stop="saveTrack(track)"
+								 src="https://openclipart.org/download/237989/save-file.svg">
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div v-else-if="!searchTerm.length">
 				<div class="message">
 					There are no tracks yet. 
 					Record the station for a while and this list will be filled soon.
+				</div>
+			</div>
+			<div v-else>
+				<div class="message">
+					No tracks matching the search term.
 				</div>
 			</div>
 		</div>

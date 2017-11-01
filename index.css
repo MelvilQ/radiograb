@@ -2,7 +2,7 @@ html, body {
 	margin: 0;
 	padding: 0;
 	font-family: 'Rajdhani', sans-serif;
-	font-size: 15pt;
+	font-size: 20px;
 }
 
 [v-cloak] { 
@@ -14,7 +14,7 @@ button {
 	background-color: steelblue;
 	color: white;
 	font-family: 'Rajdhani', sans-serif;
-	font-size: 14pt;
+	font-size: 18px;
 }
 
 button:disabled {
@@ -22,11 +22,7 @@ button:disabled {
 }
 
 div.player-box {
-	position: fixed;
-	width: 100%;
 	height: 70px;
-	top: 0;
-	left: 0;
 	background-color: deepskyblue;
 }
 
@@ -47,6 +43,21 @@ span.selected-station-info {
 	margin-right: 20px;
 }
 
+input[type=text].search-term-input {
+	padding-left: 4px;
+	width: 160px;	
+	height: 26px;
+	font-size: 20px;
+	font-family: 'Rajdhani', sans-serif;
+	border: 1px solid steelblue;
+	border-radius: 0;
+	margin-right: 20px;
+}
+
+input[type=text].search-term-input:focus {
+	outline: none;
+}
+
 input[type=range] {
 	display: block;
 	float: right;
@@ -57,11 +68,7 @@ input[type=range] {
 }
 
 div.station-picker {
-	position: fixed;
-	width: 100%;
 	height: 80px;
-	top: 70px;
-	left: 0;
 	display: flex;
 	flex-flow: row nowrap;
 	overflow-x: auto;
@@ -86,6 +93,7 @@ div.station-box.selected {
 
 img.logo {
 	height: 40px;
+	cursor: pointer;
 }
 
 img.logo.inactive {
@@ -94,32 +102,81 @@ img.logo.inactive {
 
 div.track-list-area {
 	width: 100%;
-	margin-top: 150px;
 }
 
-table.track-list {
+table.track-list-head, table.track-list-body {
+	display: block;
 	width: 100%;
 	border-spacing: 0;
 }
 
-table.track-list thead tr {
+table.track-list-head {
 	background-color: steelblue;
+	font-weight: bold;
+	cursor: pointer;
 }
 
-table.track-list tbody tr:nth-child(2n) {
+table.track-list-body {
+	max-height: calc(100vh - 182px);
+	overflow-y: auto;
+}
+
+table.track-list-head tbody, table.track-list-body tbody {
+	display: block;
+	width: 100%;
+}
+
+table.track-list-head tr, table.track-list-body tr {
+	display: block;
+	width: calc(100vw - 16px);
+}
+
+table.track-list-body tr:nth-child(2n) {
 	background-color: lightblue;
 }
 
-table.track-list tbody tr:nth-child(2n+1) {
+table.track-list-body tr:nth-child(2n+1) {
 	background-color: lightsteelblue;
 }
 
-table.track-list th, table.track-list td {
-	padding: 2px 5px;
+td {
+	display: inline-block;
+	padding: 3px 6px;
 	text-align: left;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+td.artist-column {
+	width: 33%;
+}
+
+td.title-column {
+	width: 33%;
+}
+
+td.length-column {
+	width: 6%;
+}
+
+td.time-column {
+	width: 9%;
+}
+
+td.action-column {
+	width: 12%;
+	font-size: 0;
+	text-align: right;
 }
 
 div.message {
 	padding: 20px;
 	font-weight: bold;
+}
+
+img.symbol {
+	height: 26px;
+	cursor: pointer;
+	margin: 0;
+	padding: 0;
 }

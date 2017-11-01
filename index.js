@@ -12,7 +12,10 @@ new Vue({
 		audioPlayer: new AudioPlayer(),
 		trackCutter: new TrackCutter(),
 		selectedStation: null,
-		selectedTrack: null
+		selectedTrack: null,
+		searchTerm: '',
+		sortColumn: 'time',
+		sortOrder: 'desc'
 	},
 	computed: {
 		stations: function(){
@@ -26,7 +29,11 @@ new Vue({
 			}
 		},
 		tracks: function() {
-			return this.selectedStation.trackListManager.tracks;
+			return this.selectedStation.trackListManager.getTracksFilteredAndSorted(
+				this.searchTerm,
+				this.sortColumn,
+				this.sortOrder
+			);
 		},
 		isLivePossible: function(){
 			return (!!this.selectedStation && this.selectedStation.recording);
@@ -35,6 +42,14 @@ new Vue({
 	methods: {
 		selectStation: function(station){
 			this.selectedStation = station;
+		},
+		changeSorting: function(column){
+			if(this.sortColumn === column){
+				this.sortOrder = (this.sortOrder === 'asc') ? 'desc' : 'asc'; 
+			} else {
+				this.sortColumn = column;
+				this.sortOrder = 'asc';
+			}
 		},
 		selectTrack: function(track){
 			this.selectedTrack = track;

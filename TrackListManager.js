@@ -1,4 +1,5 @@
 const fs = require('fs-extra');
+const moment = require('moment');
 const constants = require('./constants');
 
 class TrackListManager {
@@ -15,7 +16,7 @@ class TrackListManager {
 
 	async loadTracks() {
 		try {
-			const json = await fs.readFile(this.getTracksFile())
+			const json = await fs.readFile(this.getTracksFile());
 			this.tracks = JSON.parse(json);
 		} catch(e){
 			console.log('no tracks.json for station ' + this.name);
@@ -34,6 +35,35 @@ class TrackListManager {
 
 	async saveTracks(){
 		await fs.writeFile(this.getTracksFile(), JSON.stringify(this.tracks));	
+	}
+
+	getTracksFilteredAndSorted(searchTerm, sortColumn, sortOrder){
+		return this.tracks.filter(track => 
+			track.artist.toUpperCase().includes(searchTerm.toUpperCase())
+			|| track.title.toUpperCase().includes(searchTerm.toUpperCase())
+		).sort((track1, track2) => {
+			if(sortColumn === 'artist' && sortOrder === 'asc'){
+				return (track1.artist.toUpperCase() < track2.artist.toUpperCase()) ? -1 : 1;
+			} else if(sortColumn === 'artist' && sortOrder === 'desc'){
+				return (track1.artist.toUpperCase() > track2.artist.toUpperCase()) ? -1 : 1;
+			} else if(sortColumn === 'title' && sortOrder === 'asc'){
+				return (track1.title.toUpperCase() < track2.title.toUpperCase()) ? -1 : 1;
+			} else if(sortColumn === 'title' && sortOrder === 'desc'){
+				return (track1.title.toUpperCase() > track2.title.toUpperCase()) ? -1 : 1;
+			} else if(sortColumn === 'length' && sortOrder === 'asc'){
+				return (track1.length < track2.length) ? -1 : 1;
+			} else if(sortColumn === 'length' && sortOrder === 'desc'){
+				return (track1.length > track2.length) ? -1 : 1;
+			} else if(sortColumn === 'time' && sortOrder === 'asc'){
+				return (moment(track1.time, 'D.M.YYYY H:mm')
+					.isBefore(moment(track2.time, 'D.M.YYYY H:mm'))) ? -1 : 1;
+			} else if(sortColumn === 'time' && sortOrder === 'desc'){
+				return (moment(track1.time, 'D.M.YYYY H:mm')
+					.isAfter(moment(track2.time, 'D.M.YYYY H:mm'))) ? -1 : 1;
+			} else {
+				return 0;
+			}
+		});
 	}
 }
 
