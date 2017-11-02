@@ -96,7 +96,7 @@ new Vue({
 			this.selectStation(candidates[0]);
 		}
 
-		if(this.settings.volume){
+		if (this.settings.volume){
 			this.audioPlayer.volume = this.settings.volume;
 		}
 		

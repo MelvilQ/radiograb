@@ -1,4 +1,5 @@
 const fs = require('fs-extra');
+const _ = require('lodash');
 const constants = require('./constants');
 const TrackListManager = require('./TrackListManager');
 const Recorder = require('./Recorder');
@@ -24,11 +25,12 @@ class StationManager {
 				station.recorder.record();
 			}
 		});
-		
 	}
 
-	saveStations() {
-		// TODO: implement, don't serialize trackListManager and recorder
+	async saveStations() {
+		// don't serialize trackListManager and recorder
+		const stations = this.stations.map(station => _.omit(station, ['trackListManager', 'recorder']));
+		await fs.writeFile(constants.stationsFile, JSON.stringify(stations, null, 4));
 	}
 }
 
