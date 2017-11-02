@@ -1,6 +1,7 @@
 const Vue = require('./node_modules/vue/dist/vue');
 const open = require('open');
 const StationManager = require('./StationManager');
+const SettingsManager = require('./SettingsManager');
 const AudioPlayer = require('./AudioPlayer');
 const TrackCutter = require('./TrackCutter');
 const constants = require('./constants');
@@ -9,6 +10,7 @@ new Vue({
 	el: '#app',
 	data: {
 		stationManager: new StationManager(),
+		settingsManager: new SettingsManager(),
 		audioPlayer: new AudioPlayer(),
 		trackCutter: new TrackCutter(),
 		selectedStation: null,
@@ -20,6 +22,9 @@ new Vue({
 	computed: {
 		stations: function(){
 			return this.stationManager.stations;
+		},
+		settings: function(){
+			return this.settingsManager.settings;
 		},
 		currentTrack: function(){
 			if (this.audioPlayer.mode === 'live'){
@@ -42,6 +47,7 @@ new Vue({
 	methods: {
 		selectStation: function(station){
 			this.selectedStation = station;
+			this.settingsManager.setLastStation(station);
 		},
 		changeSorting: function(column){
 			if(this.sortColumn === column){
@@ -76,12 +82,24 @@ new Vue({
 	watch: {
 		'audioPlayer.volume': function(){
 			this.audioPlayer.applyVolume();
+			this.settingsManager.setVolume(this.audioPlayer.volume);
 		}
 	},
 	created: function(){
-		if(this.stationManager.stations.length){
-			this.selectStation(this.stationManager.stations[0]);
+		let candidates;
+		if (this.settings.lastStation) {
+			candidates = this.stations.filter(station => station.name === this.settings.lastStation);
+		} else {
+			candidates = this.stations;
 		}
+		if (candidates.length){
+			this.selectStation(candidates[0]);
+		}
+
+		if(this.settings.volume){
+			this.audioPlayer.volume = this.settings.volume;
+		}
+		
 		this.stationManager.startRecording();
 	}
 });
