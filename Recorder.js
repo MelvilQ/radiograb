@@ -4,6 +4,7 @@ const jpath = require('json-path');
 const moment = require('moment');
 const mkdirp = require('mkdirp-promise');
 const constants = require('./constants');
+const Track = require('./Track');
 
 class Recorder {
 
@@ -38,15 +39,9 @@ class Recorder {
 	stop() {
 		this.station.recording = false;
 		console.log('stopped recording ' + this.station.name);
-
 		this.streamReader.pause();
 		clearInterval(this.songInfoDownloader);
-		if(this.currentTrack){
-			this.currentTrack.end = moment().diff(this.startOfStream, 'seconds', true);
-			this.currentTrack.length = Math.round(this.currentTrack.end - this.currentTrack.start);
-			this.currentTrack.complete = false;
-			this.trackListManager.addTrack(this.currentTrack);
-		}
+		this.addCurrentTrackToList();
 	}
 
 	checkSongInfo() {
@@ -54,30 +49,31 @@ class Recorder {
 			const artist = jpath.resolve(body, this.station.songInfo.tags.artist)[0];
 			const title = jpath.resolve(body, this.station.songInfo.tags.title)[0];
 			const elapsed = moment().diff(this.startOfStream, 'seconds', true);
+			const timeStr = moment().format('D.M.YYYY H:mm');
 			if(this.currentTrack && this.currentTrack.artist === artist && this.currentTrack.title === title){
 				return;		
 			}
-			const track = {
-				artist, 
-				title, 
-				start: elapsed,
-				time: moment().format('D.M.YYYY H:mm'),
-				take: this.audioFileName
-			};
+			const track = new Track(artist, title, elapsed, timeStr, this.audioFileName);
 			if(!this.currentTrack){
 				// start first track
-				track.complete = false;
 				this.currentTrack = track;
 			} else {
 				// save old track
-				this.currentTrack.end = elapsed;
-				this.currentTrack.length = Math.floor(this.currentTrack.end - this.currentTrack.start);
-				this.trackListManager.addTrack(this.currentTrack);
+				this.addCurrentTrackToList();
 				// start new track
 				track.complete = true;
 				this.currentTrack = track;
 			}
 		});
+	}
+
+	addCurrentTrackToList(){
+		if (!this.currentTrack){
+			return;
+		}
+		this.currentTrack.end = moment().diff(this.startOfStream, 'seconds', true);
+		this.currentTrack.length = Math.floor(this.currentTrack.end - this.currentTrack.start);
+		this.trackListManager.addTrack(this.currentTrack);
 	}
 }
 
