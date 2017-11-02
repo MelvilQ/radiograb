@@ -1,6 +1,7 @@
 const fs = require('fs-extra');
 const moment = require('moment');
 const constants = require('./constants');
+const Track = require('./Track');
 
 class TrackListManager {
 
@@ -17,7 +18,7 @@ class TrackListManager {
 	async loadTracks() {
 		try {
 			const json = await fs.readFile(this.getTracksFile());
-			this.tracks = JSON.parse(json);
+			this.tracks = JSON.parse(json).map(track => new Track(track));
 		} catch(e){
 			console.log('no tracks.json for station ' + this.name);
 		}

@@ -93,10 +93,10 @@
 						<td class="time-column">{{track.time}}</td>
 						<td class="action-column">
 							<img class="symbol"
-								@click.stop="searchOnGoogle(track)"
+								@click.stop="open(track.getGoogleLink())"
 								src="http://logok.org/wp-content/uploads/2015/09/Google-logo-2015-G-icon-640x480.png">
 						    <img class="symbol"
-								@click.stop="searchOnGoogle(track)"
+								@click.stop="open(track.getYoutubeLink())"
 								src="http://logok.org/wp-content/uploads/2014/08/Youtube-logo-2017-640x480.png">
 							<img class="symbol"
 								 @click.stop="saveTrack(track)"

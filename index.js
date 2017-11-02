@@ -71,14 +71,7 @@ new Vue({
 			const seconds = ('0' + (length % 60)).slice(-2);
 			return minutes + ':' + seconds;
 		},
-		searchOnGoogle: function(track){
-			open('https://www.google.de/search?q=' 
-				+ encodeURIComponent(track.artist + ' ' + track.title));
-		},
-		searchOnYouTube: function(track){
-			open('https://www.youtube.com/results?search_query=' 
-				+ encodeURIComponent(track.artist + ' ' + track.title));
-		}
+		open // opens a link in the default web browser
 	},
 	watch: {
 		'audioPlayer.volume': function(){
