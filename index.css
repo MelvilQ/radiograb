@@ -180,3 +180,24 @@ img.symbol {
 	margin: 0;
 	padding: 0;
 }
+
+div.overlay {
+	position: absolute;
+	margin: 0 auto;
+	top: 100px; left: 0; bottom: 0; right: 0;
+	z-index: 17;
+	border: 2px solid steelblue;
+	border-top: 20px solid steelblue;
+	background-color: white;
+	text-align: center;
+}
+
+div.track-editor.overlay {
+	width: 500px;
+	height: 300px;
+}
+
+div.save-file.overlay {
+	width: 300px;
+	height: 200px;
+}

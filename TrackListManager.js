@@ -35,7 +35,8 @@ class TrackListManager {
 	}
 
 	async saveTracks(){
-		await fs.writeFile(this.getTracksFile(), JSON.stringify(this.tracks));	
+		const json = JSON.stringify(this.tracks, null, 4);
+		await fs.writeFile(this.getTracksFile(), json);	
 	}
 
 	getTracksFilteredAndSorted(searchTerm, sortColumn, sortOrder){
@@ -52,9 +53,9 @@ class TrackListManager {
 			} else if(sortColumn === 'title' && sortOrder === 'desc'){
 				return (track1.title.toUpperCase() > track2.title.toUpperCase()) ? -1 : 1;
 			} else if(sortColumn === 'length' && sortOrder === 'asc'){
-				return (track1.length < track2.length) ? -1 : 1;
+				return (track1.getLength() < track2.getLength()) ? -1 : 1;
 			} else if(sortColumn === 'length' && sortOrder === 'desc'){
-				return (track1.length > track2.length) ? -1 : 1;
+				return (track1.getLength() > track2.getLength()) ? -1 : 1;
 			} else if(sortColumn === 'time' && sortOrder === 'asc'){
 				return (moment(track1.time, 'D.M.YYYY H:mm')
 					.isBefore(moment(track2.time, 'D.M.YYYY H:mm'))) ? -1 : 1;

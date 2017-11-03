@@ -17,7 +17,19 @@ new Vue({
 		selectedTrack: null,
 		searchTerm: '',
 		sortColumn: 'time',
-		sortOrder: 'desc'
+		sortOrder: 'desc',
+		editTrackDialog: {
+			visible: false,
+			track: null,
+			artist: null,
+			title: null,
+			start: null,
+			end: null
+		},
+		saveFileDialog: {
+			visible: false,
+			isSaving: false
+		}
 	},
 	computed: {
 		stations: function(){
@@ -66,16 +78,50 @@ new Vue({
 				+ '/' + track.take;
 			this.audioPlayer.playRecording(file, track.start, this.selectedStation.offset);
 		},
-		saveTrack: function(track){
-			this.trackCutter.saveTrack(track, this.selectedStation, './data');
+		openEditTrackDialog: function(track){
+			this.editTrackDialog.track = track;
+			this.editTrackDialog.artist = track.artist;
+			this.editTrackDialog.title = track.title;
+			this.editTrackDialog.start = track.start;
+			this.editTrackDialog.end = track.end;
+			this.editTrackDialog.visible = true;
+		},
+		submitEditTrackDialog: function(){
+			this.editTrackDialog.track.artist = this.editTrackDialog.artist;
+			this.editTrackDialog.track.title = this.editTrackDialog.title;
+			this.editTrackDialog.track.start = this.editTrackDialog.start;
+			this.editTrackDialog.track.end = this.editTrackDialog.end;
+			this.editTrackDialog.track.edited = true;
+			this.selectedStation.trackListManager.saveTracks();
+			this.editTrackDialog.visible = false;
+		},
+		cancelEditTrackDialog: function(){
+			this.editTrackDialog.visible = false;
+		},
+		openSaveFolderPicker: function() {
+			document.getElementById('folderPicker').click();
+		},
+		updateSaveFolder: function(){
+			const folder = document.getElementById('folderPicker').files[0].path;
+			if(!folder || !folder.length){
+				return;
+			}
+			this.settings.saveFolder = folder;
+			this.settingsManager.saveSettings();
+		},
+		saveTrack: async function(track){
+			if(!this.settings.saveFolder || !this.settings.saveFolder.length){
+				return;
+			}
+			this.saveFileDialog.visible = true;
+			this.saveFileDialog.isSaving = true;
+			await this.trackCutter.saveTrack(track, this.selectedStation, this.settings.saveFolder);
+			this.saveFileDialog.isSaving = false;
+			track.saved = true;
+			this.selectedStation.trackListManager.saveTracks();
 		},
 		live: function(){
 			this.audioPlayer.playLive(this.selectedStation.stream.url);
-		},
-		formatLength: function(length){
-			const minutes = Math.floor(length / 60).toString();
-			const seconds = ('0' + (length % 60)).slice(-2);
-			return minutes + ':' + seconds;
 		},
 		open // opens a link in the default web browser
 	},

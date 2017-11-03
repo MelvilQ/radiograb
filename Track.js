@@ -14,8 +14,23 @@ class Track {
 			this.time = time;
 			this.take = take;
 			this.complete = false;
-			this.length = null;
+			this.edited = false;
+			this.saved = false;
 		}
+	}
+
+	getLength() {
+		return Math.floor(this.end - this.start);
+	}
+
+	getLengthAsString() {
+		const length = this.getLength();
+		if(!length) {
+			return 'unknown';
+		}
+		const minutes = Math.floor(length / 60).toString();
+		const seconds = ('0' + (length % 60)).slice(-2);
+		return minutes + ':' + seconds;
 	}
 
 	getGoogleLink() {

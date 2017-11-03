@@ -8,8 +8,7 @@ class TrackCutter {
 		const dest = outputFolder + '/' + track.artist + ' - ' + track.title + '.' + station.stream.format;
 		const cmd = 'ffmpeg -i "' + source + '" -ss ' + track.start + ' -to ' + track.end + ' -y "' + dest + '"';
 		try {
-			const result = await exec(cmd);
-			console.log(result);
+			await exec(cmd);
 		} catch(e){
 			console.log(e);
 		}

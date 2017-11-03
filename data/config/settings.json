@@ -1,5 +1,6 @@
 {
-    "lastStation": "Planet Radio",
-    "volume": "0",
-    "property": "value"
+    "lastStation": "Hit Radio FFH",
+    "volume": "20",
+    "property": "value",
+    "saveFolder": "/home/melvil/Downloads"
 }

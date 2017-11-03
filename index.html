@@ -81,7 +81,7 @@
 							<span v-if="sortColumn === 'time' && sortOrder === 'asc'">&#x25B2;</span>
 							<span v-if="sortColumn === 'time' && sortOrder === 'desc'">&#x25BC;</span>
 						</td>
-						<td class="action-column"></td>
+						<td class="action-column"><button @click="openSaveFolderPicker">x</button></td>
 					</tr>
 				</table>
 				<table class="track-list-body">
@@ -89,15 +89,18 @@
 						@click="selectTrackAndPlay(track)">
 						<td class="artist-column">{{track.artist}}</td>
 						<td class="title-column">{{track.title}}</td>
-						<td class="length-column">{{formatLength(track.length)}}</td>
+						<td class="length-column">{{track.getLengthAsString()}}</td>
 						<td class="time-column">{{track.time}}</td>
 						<td class="action-column">
 							<img class="symbol"
-								@click.stop="open(track.getGoogleLink())"
-								src="http://logok.org/wp-content/uploads/2015/09/Google-logo-2015-G-icon-640x480.png">
+								 @click.stop="open(track.getGoogleLink())"
+								 src="http://logok.org/wp-content/uploads/2015/09/Google-logo-2015-G-icon-640x480.png">
 						    <img class="symbol"
-								@click.stop="open(track.getYoutubeLink())"
-								src="http://logok.org/wp-content/uploads/2014/08/Youtube-logo-2017-640x480.png">
+								 @click.stop="open(track.getYoutubeLink())"
+								 src="http://logok.org/wp-content/uploads/2014/08/Youtube-logo-2017-640x480.png">
+							<img class="symbol"
+								 @click.stop="openEditTrackDialog(track)"
+								 src="https://image.freepik.com/free-icon/edit-interface-symbol_318-61460.jpg">
 							<img class="symbol"
 								 @click.stop="saveTrack(track)"
 								 src="https://openclipart.org/download/237989/save-file.svg">
@@ -123,12 +126,37 @@
 			</div>
 		</div>
 
-		<div class="track-edit-overlay"></div>
-		<div class="station-edit-overlay"></div>
-		<div class="settings-overlay"></div>
+		<div class="track-editor overlay" v-show="editTrackDialog.visible">
+			<h3>Edit Track</h3>
+			<form @submit.prevent="submitEditTrackDialog">
+				<div><label>Artist</label><input type="text" v-model="editTrackDialog.artist"></div>
+				<div><label>Title</label><input type="text" v-model="editTrackDialog.title"></div>
+				<div><label>Start</label><input type="number" step="0.1" v-model="editTrackDialog.start"></div>
+				<div><label>End</label><input type="number" step="0.1" v-model="editTrackDialog.end"></div>
+				<div>
+					<button class="cancel" @click="cancelEditTrackDialog">Cancel</button>
+					<button class="ok" type="submit">OK</button>
+				</div>
+			</form>
+		</div>
+
+		<div class="save-file overlay" v-show="saveFileDialog.visible">
+			<h3>Saving Track on Disk</h3>
+			<div v-if="saveFileDialog.isSaving">
+				File is written on disk, please wait...
+			</div>
+			<div v-else>
+				<div>Successfully finished!</div>
+				<div><button @click="saveFileDialog.visible=false">OK</button></div>
+			</div>
+		</div>
+
+		<input type="file" webkitdirectory 
+			   id="folderPicker"  
+			   @change="updateSaveFolder"
+			   style="display: none">
 		
 	</div>
 </body>
-	
 
 </html>
