@@ -48,6 +48,9 @@ class Recorder {
 		request({url: this.station.songInfo.url, json: true}, (err, res, body) => {
 			const artist = jpath.resolve(body, this.station.songInfo.tags.artist)[0];
 			const title = jpath.resolve(body, this.station.songInfo.tags.title)[0];
+			if(!artist || !title){
+				return;
+			}
 			const elapsed = moment().diff(this.startOfStream, 'seconds', true).toFixed(1);
 			const timeStr = moment().format('D.M.YYYY H:mm');
 			if(this.currentTrack && this.currentTrack.artist === artist && this.currentTrack.title === title){

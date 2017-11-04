@@ -16,7 +16,7 @@ class AudioPlayer {
 		this.applyVolume();
 		this.audio.play();
 		this.isPlaying = true;
-		this.mode = "live";
+		this.mode = 'live';
 	}
 
 	playRecording(file, start, offset, duration){
@@ -32,9 +32,21 @@ class AudioPlayer {
 		this.audio.play();
 		this.isPlaying = true;
 		if(duration){
-			this.timeout = setTimeout(() => this.audio.pause(), duration*1000);
+			this.timeout = setTimeout(() => this.stop(), duration*1000);
 		}
-		this.mode = "recording";
+		this.mode = 'recording';
+	}
+
+	minus5(){
+		if(this.audio && this.isPlaying){
+			this.audio.currentTime -= 5000;
+		}
+	}
+
+	plus5(){
+		if(this.audio && this.isPlaying){
+			this.audio.currentTime += 5000;
+		}
 	}
 
 	continue(){
@@ -48,6 +60,10 @@ class AudioPlayer {
 	pause(){
 		if(this.audio && this.isPlaying){
 			this.audio.pause();
+			if(this.timeout){
+				clearTimeout(this.timeout);
+				this.timeout = null;
+			}
 			this.isPlaying = false;
 			this.isPaused = true;
 		}

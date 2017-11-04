@@ -6,7 +6,7 @@
             "url": "http://radiofg.impek.com/fg",
             "format": "mp3"
         },
-        "recording": false,
+        "recording": true,
         "offset": 0,
         "songInfo": {
             "method": "http",
@@ -24,7 +24,7 @@
             "url": "http://mp3.ffh.de/fs_radioffh/hqlivestream.mp3",
             "format": "mp3"
         },
-        "recording": false,
+        "recording": true,
         "offset": 0,
         "songInfo": {
             "method": "http",
@@ -42,7 +42,7 @@
             "url": "http://mp3.planetradio.de/fs_planetradio/hqlivestream.mp3",
             "format": "mp3"
         },
-        "recording": false,
+        "recording": true,
         "offset": 0,
         "songInfo": {
             "method": "http",

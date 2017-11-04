@@ -61,6 +61,16 @@ new Vue({
 			this.selectedStation = station;
 			this.settingsManager.setLastStation(station);
 		},
+		startRecordingAndPlay: async function(){
+			await this.selectedStation.recorder.record();
+			this.audioPlayer.playLive(this.selectedStation.stream.url);
+			this.stationManager.saveStations();
+		},
+		stopRecordingAndStop: function(){
+			this.selectedStation.recorder.stop();
+			this.audioPlayer.stop();
+			this.stationManager.saveStations();
+		},
 		changeSorting: function(column){
 			if(this.sortColumn === column){
 				this.sortOrder = (this.sortOrder === 'asc') ? 'desc' : 'asc'; 
@@ -76,7 +86,7 @@ new Vue({
 			this.selectTrack(track);
 			const file = constants.recordingsFolder + this.selectedStation.name 
 				+ '/' + track.take;
-			this.audioPlayer.playRecording(file, track.start, this.selectedStation.offset);
+			this.audioPlayer.playRecording(file, track.start, this.selectedStation.offset, track.getLength());
 		},
 		openEditTrackDialog: function(track){
 			this.editTrackDialog.track = track;

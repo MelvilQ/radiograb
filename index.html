@@ -32,18 +32,20 @@
 					   v-model="searchTerm" 
 					   v-if="selectedStation">
 				<span v-if="selectedStation">
-					<button @click="selectedStation.recorder.record()" 
+					<button @click="startRecordingAndPlay()" 
 							v-if="!selectedStation.recording">
 						Record
 					</button>
-					<button @click="selectedStation.recorder.stop()" 
+					<button @click="stopRecordingAndStop()" 
 							v-if="selectedStation.recording">
 						Stop
 					</button>
 				</span>
 				<button @click="live" :disabled="!isLivePossible">Live</button>
-				<button @click="audioPlayer.pause()" :disabled="!audioPlayer.isPlaying">Pause</button>
-				<button @click="audioPlayer.continue()" :disabled="!audioPlayer.isPaused">Play</button>
+				<button @click="audioPlayer.minus5()" v-show="audioPlayer.isPlaying">-5</button>
+				<button @click="audioPlayer.plus5()" v-show="audioPlayer.isPlaying">+5</button>
+				<button @click="audioPlayer.pause()" v-show="audioPlayer.isPlaying">Pause</button>
+				<button @click="audioPlayer.continue()" v-show="audioPlayer.isPaused">Play</button>
 				<input type="range" min="0" max="100" v-model="audioPlayer.volume">
 			</div>
 		</div>
