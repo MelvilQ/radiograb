@@ -6,7 +6,7 @@
             "url": "http://radiofg.impek.com/fg",
             "format": "mp3"
         },
-        "recording": true,
+        "recording": false,
         "offset": 0,
         "songInfo": {
             "method": "http",
@@ -15,6 +15,75 @@
                 "artist": "/results/title",
                 "title": "/results/artist"
             }
+        },
+        "blocksManager": {
+            "name": "Radio FG",
+            "format": "mp3",
+            "blocks": [
+                {
+                    "file": "./data/recordings/Radio FG/1509831690084.mp3",
+                    "start": "2017-11-04T21:41:30.084Z",
+                    "end": "2017-11-04T21:41:30.097Z",
+                    "length": 13.218,
+                    "live": true
+                },
+                {
+                    "file": "./data/recordings/Radio FG/1509831598881.mp3",
+                    "start": "2017-11-04T21:39:58.881Z",
+                    "end": "2017-11-04T21:39:58.895Z",
+                    "length": 14.315,
+                    "live": true
+                },
+                {
+                    "file": "./data/recordings/Radio FG/1509831465602.mp3",
+                    "start": "2017-11-04T21:37:45.602Z",
+                    "end": "2017-11-04T21:37:45.687Z",
+                    "length": 85.133,
+                    "live": true
+                },
+                {
+                    "file": "./data/recordings/Radio FG/1509831381381.mp3",
+                    "start": "2017-11-04T21:36:21.381Z",
+                    "end": "2017-11-04T21:36:21.472Z",
+                    "length": 91.925,
+                    "live": true
+                },
+                {
+                    "file": "./data/recordings/Radio FG/1509831324341.mp3",
+                    "start": "2017-11-04T21:35:24.341Z",
+                    "end": "2017-11-04T21:35:24.406Z",
+                    "length": 65.045,
+                    "live": true
+                },
+                {
+                    "file": "./data/recordings/Radio FG/1509831104507.mp3",
+                    "start": "2017-11-04T21:31:44.507Z",
+                    "end": "2017-11-04T21:31:44.568Z",
+                    "length": 61.153,
+                    "live": true
+                },
+                {
+                    "file": "./data/recordings/Radio FG/1509831071436.mp3",
+                    "start": "2017-11-04T21:31:11.436Z",
+                    "end": "2017-11-04T21:31:11.477Z",
+                    "length": 41.169,
+                    "live": true
+                },
+                {
+                    "file": "./data/recordings/Radio FG/1509831004308.mp3",
+                    "start": "2017-11-04T21:30:04.308Z",
+                    "end": "2017-11-04T21:30:04.383Z",
+                    "length": 75.128,
+                    "live": true
+                },
+                {
+                    "file": "./data/recordings/Radio FG/1509809315227.mp3",
+                    "start": "2017-11-04T15:28:35.227Z",
+                    "end": "2017-11-04T15:28:35.514Z",
+                    "length": 287.295,
+                    "live": true
+                }
+            ]
         }
     },
     {
@@ -24,7 +93,7 @@
             "url": "http://mp3.ffh.de/fs_radioffh/hqlivestream.mp3",
             "format": "mp3"
         },
-        "recording": true,
+        "recording": false,
         "offset": 0,
         "songInfo": {
             "method": "http",
@@ -33,6 +102,131 @@
                 "artist": "/current/artist",
                 "title": "/current/title"
             }
+        },
+        "blocksManager": {
+            "name": "Hit Radio FFH",
+            "format": "mp3",
+            "blocks": [
+                {
+                    "file": "./data/recordings/Hit Radio FFH/1509833659497.mp3",
+                    "start": "2017-11-04T22:14:19.497Z",
+                    "end": "2017-11-04T22:14:19.884Z",
+                    "length": 387.709,
+                    "live": true
+                },
+                {
+                    "file": "./data/recordings/Hit Radio FFH/1509833151435.mp3",
+                    "start": "2017-11-04T22:05:51.435Z",
+                    "end": "2017-11-04T22:05:51.949Z",
+                    "length": 514.194,
+                    "live": true
+                },
+                {
+                    "file": "./data/recordings/Hit Radio FFH/1509833098752.mp3",
+                    "start": "2017-11-04T22:04:58.752Z",
+                    "end": "2017-11-04T22:04:58.811Z",
+                    "length": 59.429,
+                    "live": true
+                },
+                {
+                    "file": "./data/recordings/Hit Radio FFH/1509833075666.mp3",
+                    "start": "2017-11-04T22:04:35.666Z",
+                    "end": "2017-11-04T22:04:35.695Z",
+                    "length": 29.858,
+                    "live": true
+                },
+                {
+                    "file": "./data/recordings/Hit Radio FFH/1509832981736.mp3",
+                    "start": "2017-11-04T22:03:01.736Z",
+                    "end": "2017-11-04T22:03:01.836Z",
+                    "length": 100.702,
+                    "live": true
+                },
+                {
+                    "file": "./data/recordings/Hit Radio FFH/1509832882077.mp3",
+                    "start": "2017-11-04T22:01:22.077Z",
+                    "end": "2017-11-04T22:01:22.183Z",
+                    "length": 106.501,
+                    "live": true
+                },
+                {
+                    "file": "./data/recordings/Hit Radio FFH/1509832821588.mp3",
+                    "start": "2017-11-04T22:00:21.588Z",
+                    "end": "2017-11-04T22:00:21.655Z",
+                    "length": 67.082,
+                    "live": true
+                },
+                {
+                    "file": "./data/recordings/Hit Radio FFH/1509831727720.mp3",
+                    "start": "2017-11-04T21:42:07.720Z",
+                    "end": "2017-11-04T21:42:08.820Z",
+                    "length": 1100.565,
+                    "live": true
+                },
+                {
+                    "file": "./data/recordings/Hit Radio FFH/1509831690116.mp3",
+                    "start": "2017-11-04T21:41:30.116Z",
+                    "end": "2017-11-04T21:41:30.160Z",
+                    "length": 44.225,
+                    "live": true
+                },
+                {
+                    "file": "./data/recordings/Hit Radio FFH/1509831598906.mp3",
+                    "start": "2017-11-04T21:39:58.906Z",
+                    "end": "2017-11-04T21:39:58.928Z",
+                    "length": 22.282,
+                    "live": true
+                },
+                {
+                    "file": "./data/recordings/Hit Radio FFH/1509831465617.mp3",
+                    "start": "2017-11-04T21:37:45.617Z",
+                    "end": "2017-11-04T21:37:45.700Z",
+                    "length": 83.749,
+                    "live": true
+                },
+                {
+                    "file": "./data/recordings/Hit Radio FFH/1509831381397.mp3",
+                    "start": "2017-11-04T21:36:21.397Z",
+                    "end": "2017-11-04T21:36:21.487Z",
+                    "length": 90.88,
+                    "live": true
+                },
+                {
+                    "file": "./data/recordings/Hit Radio FFH/1509831324352.mp3",
+                    "start": "2017-11-04T21:35:24.352Z",
+                    "end": "2017-11-04T21:35:24.415Z",
+                    "length": 63.634,
+                    "live": true
+                },
+                {
+                    "file": "./data/recordings/Hit Radio FFH/1509831104519.mp3",
+                    "start": "2017-11-04T21:31:44.519Z",
+                    "end": "2017-11-04T21:31:44.578Z",
+                    "length": 59.925,
+                    "live": true
+                },
+                {
+                    "file": "./data/recordings/Hit Radio FFH/1509831071449.mp3",
+                    "start": "2017-11-04T21:31:11.449Z",
+                    "end": "2017-11-04T21:31:11.489Z",
+                    "length": 40.02,
+                    "live": true
+                },
+                {
+                    "file": "./data/recordings/Hit Radio FFH/1509831004321.mp3",
+                    "start": "2017-11-04T21:30:04.321Z",
+                    "end": "2017-11-04T21:30:04.394Z",
+                    "length": 73.927,
+                    "live": true
+                },
+                {
+                    "file": "./data/recordings/Hit Radio FFH/1509809313345.mp3",
+                    "start": "2017-11-04T15:28:33.345Z",
+                    "end": "2017-11-04T15:28:33.632Z",
+                    "length": 287.582,
+                    "live": true
+                }
+            ]
         }
     },
     {
@@ -42,7 +236,7 @@
             "url": "http://mp3.planetradio.de/fs_planetradio/hqlivestream.mp3",
             "format": "mp3"
         },
-        "recording": true,
+        "recording": false,
         "offset": 0,
         "songInfo": {
             "method": "http",
@@ -51,6 +245,131 @@
                 "artist": "/current/artist",
                 "title": "/current/title"
             }
+        },
+        "blocksManager": {
+            "name": "Planet Radio",
+            "format": "mp3",
+            "blocks": [
+                {
+                    "file": "./data/recordings/Planet Radio/1509833659517.mp3",
+                    "start": "2017-11-04T22:14:19.517Z",
+                    "end": "2017-11-04T22:14:19.904Z",
+                    "length": 387.709,
+                    "live": true
+                },
+                {
+                    "file": "./data/recordings/Planet Radio/1509833151447.mp3",
+                    "start": "2017-11-04T22:05:51.447Z",
+                    "end": "2017-11-04T22:05:51.961Z",
+                    "length": 514.142,
+                    "live": true
+                },
+                {
+                    "file": "./data/recordings/Planet Radio/1509833098766.mp3",
+                    "start": "2017-11-04T22:04:58.766Z",
+                    "end": "2017-11-04T22:04:58.825Z",
+                    "length": 59.246,
+                    "live": true
+                },
+                {
+                    "file": "./data/recordings/Planet Radio/1509833075680.mp3",
+                    "start": "2017-11-04T22:04:35.680Z",
+                    "end": "2017-11-04T22:04:35.709Z",
+                    "length": 29.753,
+                    "live": true
+                },
+                {
+                    "file": "./data/recordings/Planet Radio/1509832981751.mp3",
+                    "start": "2017-11-04T22:03:01.751Z",
+                    "end": "2017-11-04T22:03:01.851Z",
+                    "length": 100.441,
+                    "live": true
+                },
+                {
+                    "file": "./data/recordings/Planet Radio/1509832882090.mp3",
+                    "start": "2017-11-04T22:01:22.090Z",
+                    "end": "2017-11-04T22:01:22.196Z",
+                    "length": 106.423,
+                    "live": true
+                },
+                {
+                    "file": "./data/recordings/Planet Radio/1509832821602.mp3",
+                    "start": "2017-11-04T22:00:21.602Z",
+                    "end": "2017-11-04T22:00:21.669Z",
+                    "length": 67.213,
+                    "live": true
+                },
+                {
+                    "file": "./data/recordings/Planet Radio/1509831727733.mp3",
+                    "start": "2017-11-04T21:42:07.733Z",
+                    "end": "2017-11-04T21:42:08.833Z",
+                    "length": 1100.539,
+                    "live": true
+                },
+                {
+                    "file": "./data/recordings/Planet Radio/1509831690123.mp3",
+                    "start": "2017-11-04T21:41:30.123Z",
+                    "end": "2017-11-04T21:41:30.167Z",
+                    "length": 44.278,
+                    "live": true
+                },
+                {
+                    "file": "./data/recordings/Planet Radio/1509831598909.mp3",
+                    "start": "2017-11-04T21:39:58.909Z",
+                    "end": "2017-11-04T21:39:58.933Z",
+                    "length": 24.294,
+                    "live": true
+                },
+                {
+                    "file": "./data/recordings/Planet Radio/1509831465623.mp3",
+                    "start": "2017-11-04T21:37:45.623Z",
+                    "end": "2017-11-04T21:37:45.706Z",
+                    "length": 83.749,
+                    "live": true
+                },
+                {
+                    "file": "./data/recordings/Planet Radio/1509831381401.mp3",
+                    "start": "2017-11-04T21:36:21.401Z",
+                    "end": "2017-11-04T21:36:21.491Z",
+                    "length": 90.671,
+                    "live": true
+                },
+                {
+                    "file": "./data/recordings/Planet Radio/1509831324354.mp3",
+                    "start": "2017-11-04T21:35:24.354Z",
+                    "end": "2017-11-04T21:35:24.417Z",
+                    "length": 63.634,
+                    "live": true
+                },
+                {
+                    "file": "./data/recordings/Planet Radio/1509831104522.mp3",
+                    "start": "2017-11-04T21:31:44.522Z",
+                    "end": "2017-11-04T21:31:44.582Z",
+                    "length": 60.108,
+                    "live": true
+                },
+                {
+                    "file": "./data/recordings/Planet Radio/1509831071451.mp3",
+                    "start": "2017-11-04T21:31:11.451Z",
+                    "end": "2017-11-04T21:31:11.490Z",
+                    "length": 39.967,
+                    "live": true
+                },
+                {
+                    "file": "./data/recordings/Planet Radio/1509831004325.mp3",
+                    "start": "2017-11-04T21:30:04.325Z",
+                    "end": "2017-11-04T21:30:04.398Z",
+                    "length": 73.9,
+                    "live": true
+                },
+                {
+                    "file": "./data/recordings/Planet Radio/1509809309641.mp3",
+                    "start": "2017-11-04T15:28:29.641Z",
+                    "end": "2017-11-04T15:28:29.932Z",
+                    "length": 291.239,
+                    "live": true
+                }
+            ]
         }
     }
 ]

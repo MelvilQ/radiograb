@@ -100,42 +100,42 @@ img.logo.inactive {
 	filter: grayscale(1);
 }
 
-div.track-list-area {
+div.tracklist-area {
 	width: 100%;
 }
 
-table.track-list-head, table.track-list-body {
+table.tracklist-head, table.tracklist-body {
 	display: block;
 	width: 100%;
 	border-spacing: 0;
 }
 
-table.track-list-head {
+table.tracklist-head {
 	background-color: steelblue;
 	font-weight: bold;
 	cursor: pointer;
 }
 
-table.track-list-body {
+table.tracklist-body {
 	max-height: calc(100vh - 182px);
 	overflow-y: auto;
 }
 
-table.track-list-head tbody, table.track-list-body tbody {
+table.tracklist-head tbody, table.tracklist-body tbody {
 	display: block;
 	width: 100%;
 }
 
-table.track-list-head tr, table.track-list-body tr {
+table.tracklist-head tr, table.tracklist-body tr {
 	display: block;
 	width: calc(100vw - 16px);
 }
 
-table.track-list-body tr:nth-child(2n) {
+table.tracklist-body tr:nth-child(2n) {
 	background-color: lightblue;
 }
 
-table.track-list-body tr:nth-child(2n+1) {
+table.tracklist-body tr:nth-child(2n+1) {
 	background-color: lightsteelblue;
 }
 
@@ -167,6 +167,13 @@ td.action-column {
 	width: 12%;
 	font-size: 0;
 	text-align: right;
+}
+
+div.timeline-area {
+	width: 100%;
+	background-color: greenyellow;
+	max-height: calc(100vh - 150px);
+	overflow-y: auto;
 }
 
 div.message {

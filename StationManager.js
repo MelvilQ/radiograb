@@ -2,6 +2,7 @@ const fs = require('fs-extra');
 const _ = require('lodash');
 const constants = require('./constants');
 const TrackListManager = require('./TrackListManager');
+const BlocksManager = require('./BlocksManager');
 const Recorder = require('./Recorder');
 
 class StationManager {
@@ -15,6 +16,7 @@ class StationManager {
 		this.stations = JSON.parse(fs.readFileSync(stationsFile));
 		this.stations.forEach(station => {
 			station.trackListManager = new TrackListManager(station.name);
+			station.blocksManager = new BlocksManager(station.name, station.stream.format);
 			station.recorder = new Recorder(station);
 		});
 	}

@@ -16,6 +16,7 @@
 <body>
 	<div id="app" v-cloak>
 
+		<!-- player and title view -->
 		<div class="player-box">
 			<div class="current-track-box" v-if="currentTrack">
 				{{currentTrack.artist}} 
@@ -32,6 +33,8 @@
 					   v-model="searchTerm" 
 					   v-if="selectedStation">
 				<span v-if="selectedStation">
+					<button @click="showTimeline" v-show="displayMode === 'tracklist'">tl</button>
+					<button @click="showTracklist" v-show="displayMode === 'timeline'">tl</button>
 					<button @click="startRecordingAndPlay()" 
 							v-if="!selectedStation.recording">
 						Record
@@ -59,9 +62,9 @@
 			</div>
 		</div>
 				
-		<div class="track-list-area" v-if="selectedStation">
+		<div class="tracklist-area" v-if="selectedStation" v-show="displayMode === 'tracklist'">
 			<div v-if="tracks && tracks.length">
-				<table class="track-list-head">
+				<table class="tracklist-head">
 					<tr>
 						<td class="artist-column" @click="changeSorting('artist')">
 							Artist
@@ -83,10 +86,12 @@
 							<span v-if="sortColumn === 'time' && sortOrder === 'asc'">&#x25B2;</span>
 							<span v-if="sortColumn === 'time' && sortOrder === 'desc'">&#x25BC;</span>
 						</td>
-						<td class="action-column"><button @click="openSaveFolderPicker">x</button></td>
+						<td class="action-column">
+							<button @click="openSaveFolderPicker">sv</button>
+						</td>
 					</tr>
 				</table>
-				<table class="track-list-body">
+				<table class="tracklist-body">
 					<tr v-for="track in tracks" 
 						@click="selectTrackAndPlay(track)">
 						<td class="artist-column">{{track.artist}}</td>
@@ -122,12 +127,32 @@
 				</div>
 			</div>
 		</div>
+
+		<!-- timeline -->
+		<div class="timeline-area" v-if="selectedStation" v-show="displayMode === 'timeline'">
+			<div v-if="blocks && blocks.length" style="position: relative">
+				<div v-for="block in blocks">
+					{{block.file}}, 
+					{{block.start.format('D.M.YYYY H:mm')}} bis {{block.start.format('D.M.YYYY H:mm')}}
+				</div>
+				<div v-for="track in tracks">
+					{{track.artist}} - {{track.title}}
+				</div>
+			</div>
+			<div v-else>
+				<div class="message">
+					There is no recording yet, so the timeline is emtpy.
+				</div>
+			</div>
+		</div>
+
 		<div v-else>
 			<div class="message">
 				Select a station!
 			</div>
 		</div>
 
+		<!-- track edit dialog -->
 		<div class="track-editor overlay" v-show="editTrackDialog.visible">
 			<h3>Edit Track</h3>
 			<form @submit.prevent="submitEditTrackDialog">
@@ -142,6 +167,7 @@
 			</form>
 		</div>
 
+		<!-- track extraction progress dialog -->
 		<div class="save-file overlay" v-show="saveFileDialog.visible">
 			<h3>Saving Track on Disk</h3>
 			<div v-if="saveFileDialog.isSaving">
@@ -153,6 +179,7 @@
 			</div>
 		</div>
 
+		<!-- hidden file input for the local directory to save tracks into -->
 		<input type="file" webkitdirectory 
 			   id="folderPicker"  
 			   @change="updateSaveFolder"

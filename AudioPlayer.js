@@ -34,7 +34,26 @@ class AudioPlayer {
 		if(duration){
 			this.timeout = setTimeout(() => this.stop(), duration*1000);
 		}
-		this.mode = 'recording';
+		this.mode = 'track';
+	}
+
+	playTimeline(block, start){
+		if(this.audio){
+			this.stop();
+		}
+		this.audio = new Audio(block.file);
+		this.applyVolume();
+		this.audio.currentTime = start;
+		this.audio.play();
+		this.isPlaying = true;
+		if(block.live){
+			// in live mode, from time to time we have to reload the file 
+			// because it is currently written and we need the new data
+			this.audio.addEventListener('ended', () => {
+				this.playTimeline(block, this.audio.currentTime);
+			});
+		}
+		this.mode = 'timeline';
 	}
 
 	minus5(){

@@ -14,6 +14,7 @@ new Vue({
 		audioPlayer: new AudioPlayer(),
 		trackCutter: new TrackCutter(),
 		selectedStation: null,
+		displayMode: 'tracklist',
 		selectedTrack: null,
 		searchTerm: '',
 		sortColumn: 'time',
@@ -41,7 +42,7 @@ new Vue({
 		currentTrack: function(){
 			if (this.audioPlayer.mode === 'live'){
 				return this.selectedStation.recorder.currentTrack;
-			} else if(this.audioPlayer.mode === 'recording'){
+			} else if(this.audioPlayer.mode === 'track'){
 				return this.selectedTrack;
 			}
 		},
@@ -52,6 +53,9 @@ new Vue({
 				this.sortOrder
 			);
 		},
+		blocks: function() {
+			return this.selectedStation.blocksManager.blocks;
+		},
 		isLivePossible: function(){
 			return (!!this.selectedStation && this.selectedStation.recording);
 		}
@@ -60,6 +64,12 @@ new Vue({
 		selectStation: function(station){
 			this.selectedStation = station;
 			this.settingsManager.setLastStation(station);
+		},
+		showTimeline: function(){
+			this.displayMode = 'timeline';
+		},
+		showTracklist: function(){
+			this.displayMode = 'tracklist';
 		},
 		startRecordingAndPlay: async function(){
 			await this.selectedStation.recorder.record();
@@ -141,7 +151,7 @@ new Vue({
 			this.settingsManager.setVolume(this.audioPlayer.volume);
 		}
 	},
-	created: function(){
+	created: function() {
 		let candidates;
 		if (this.settings.lastStation) {
 			candidates = this.stations.filter(station => station.name === this.settings.lastStation);
