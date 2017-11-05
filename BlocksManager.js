@@ -24,8 +24,9 @@ class BlocksManager {
 			const filePath = folder + '/' + recording;
 			const duration = await mp3Duration(filePath);
 			const timestampStart = parseInt(recording.replace('.' + this.format));
-			const timestampEnd = timestampStart + duration;
+			const timestampEnd = timestampStart + 1000 * duration;
 			const block = {
+				name: recording,
 				file: filePath,
 				start: moment(timestampStart),
 				end: moment(timestampEnd),

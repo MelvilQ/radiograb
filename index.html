@@ -130,14 +130,28 @@
 
 		<!-- timeline -->
 		<div class="timeline-area" v-if="selectedStation" v-show="displayMode === 'timeline'">
-			<div v-if="blocks && blocks.length" style="position: relative">
-				<div v-for="block in blocks">
-					{{block.file}}, 
-					{{block.start.format('D.M.YYYY H:mm')}} bis {{block.start.format('D.M.YYYY H:mm')}}
+			<div v-if="blocks && blocks.length" >
+				<div v-for="(block, i) in blocks" 
+					 class="timeline-block">
+					<div class="timeline-block-end">
+						{{block.end.format('D.M.YYYY H:mm')}}
+					</div>
+					<div class="timeline-block-inner" :style="{height: blockHeights[i]}">
+						<div v-for="track in getTracksOfBlock(block.name)"
+							 class="timeline-track"
+							 :title="track.artist + ' - ' + track.title"
+							 :style="{height: track.height, bottom: track.bottom}"
+							 @click="selectTrackAndPlay(track)">
+							<span v-if="parseInt(track.height) > 20">
+								{{track.artist}} - {{track.title}}
+							</span>
+						</div>
+					</div>
+					<div class="timeline-block-start">
+						{{block.start.format('D.M.YYYY H:mm')}}
+					</div>
 				</div>
-				<div v-for="track in tracks">
-					{{track.artist}} - {{track.title}}
-				</div>
+				
 			</div>
 			<div v-else>
 				<div class="message">

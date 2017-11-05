@@ -176,6 +176,29 @@ div.timeline-area {
 	overflow-y: auto;
 }
 
+div.timeline-block {
+	margin: 20px;
+}
+
+div.timeline-block-start, div.timeline-block-end {
+	text-align: center;
+	font-size: 15px;
+}
+
+div.timeline-block-inner {
+	position: relative;
+	background-color: lightseagreen;
+}
+
+div.timeline-track {
+	position: absolute;
+	margin-left: 30px;
+	width: calc(100% - 40px);
+	font-size: 16px;
+	background-color: violet;
+	border: 1px solid gray;
+}
+
 div.message {
 	padding: 20px;
 	font-weight: bold;

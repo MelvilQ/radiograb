@@ -4,6 +4,7 @@ const StationManager = require('./StationManager');
 const SettingsManager = require('./SettingsManager');
 const AudioPlayer = require('./AudioPlayer');
 const TrackCutter = require('./TrackCutter');
+const Track = require('./Track');
 const constants = require('./constants');
 
 new Vue({
@@ -19,6 +20,7 @@ new Vue({
 		searchTerm: '',
 		sortColumn: 'time',
 		sortOrder: 'desc',
+		timelineScale: 0.4,
 		editTrackDialog: {
 			visible: false,
 			track: null,
@@ -55,6 +57,9 @@ new Vue({
 		},
 		blocks: function() {
 			return this.selectedStation.blocksManager.blocks;
+		},
+		blockHeights: function(){
+			return this.blocks.map(block => Math.round(block.length * this.timelineScale) + 'px');
 		},
 		isLivePossible: function(){
 			return (!!this.selectedStation && this.selectedStation.recording);
@@ -139,6 +144,13 @@ new Vue({
 			this.saveFileDialog.isSaving = false;
 			track.saved = true;
 			this.selectedStation.trackListManager.saveTracks();
+		},
+		getTracksOfBlock: function(name){
+			return this.tracks.filter(track => track.take === name)
+				.map(track => Object.assign(track, {
+					height: Math.round(track.getLength() * this.timelineScale) + 'px',
+					bottom: Math.round(track.start * this.timelineScale) + 'px'
+				}));
 		},
 		live: function(){
 			this.audioPlayer.playLive(this.selectedStation.stream.url);
