@@ -4,7 +4,6 @@ const StationManager = require('./StationManager');
 const SettingsManager = require('./SettingsManager');
 const AudioPlayer = require('./AudioPlayer');
 const TrackCutter = require('./TrackCutter');
-const Track = require('./Track');
 const constants = require('./constants');
 
 new Vue({
@@ -122,6 +121,16 @@ new Vue({
 		},
 		cancelEditTrackDialog: function(){
 			this.editTrackDialog.visible = false;
+		},
+		testCutStart: function(){
+			const track = this.editTrackDialog.track;
+			const file = constants.recordingsFolder + this.selectedStation.name + '/' + track.take;
+			this.audioPlayer.playRecording(file, this.editTrackDialog.start, this.selectedStation.offset, 4);
+		},
+		testCutEnd: function(){
+			const track = this.editTrackDialog.track;
+			const file = constants.recordingsFolder + this.selectedStation.name + '/' + track.take;
+			this.audioPlayer.playRecording(file, this.editTrackDialog.end - 4, this.selectedStation.offset, 4);
 		},
 		openSaveFolderPicker: function() {
 			document.getElementById('folderPicker').click();
