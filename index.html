@@ -136,13 +136,15 @@
 					<div class="timeline-block-end">
 						{{block.end.format('D.M.YYYY H:mm')}}
 					</div>
-					<div class="timeline-block-inner" :style="{height: blockHeights[i]}">
+					<div class="timeline-block-inner" 
+						 @click="playInBlock(block, $event)" 
+						 :style="{height: blockHeights[i]}">
 						<div v-for="track in getTracksOfBlock(block.name)"
 							 class="timeline-track"
 							 :title="track.artist + ' - ' + track.title"
 							 :style="{height: track.height, bottom: track.bottom}"
 							 @click="selectTrackAndPlay(track)">
-							<span v-if="parseInt(track.height) > 20">
+							<span v-if="parseInt(track.height) > 24">
 								{{track.artist}} - {{track.title}}
 							</span>
 						</div>

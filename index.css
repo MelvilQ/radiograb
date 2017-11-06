@@ -173,31 +173,34 @@ td.action-column {
 
 div.timeline-area {
 	width: 100%;
-	background-color: greenyellow;
+	background-color: steelblue;
+	color: white;
 	max-height: calc(100vh - 150px);
 	overflow-y: auto;
 }
 
 div.timeline-block {
-	margin: 20px;
+	margin: 25px 70px;
 }
 
 div.timeline-block-start, div.timeline-block-end {
 	text-align: center;
-	font-size: 15px;
+	font-size: 18px;
 }
 
 div.timeline-block-inner {
 	position: relative;
-	background-color: lightseagreen;
+	background-color: deepskyblue;
 }
 
 div.timeline-track {
 	position: absolute;
-	margin-left: 30px;
-	width: calc(100% - 40px);
-	font-size: 16px;
-	background-color: violet;
+	margin-left: 70px;
+	padding-left: 30px;
+	width: calc(100% - 130px);
+	font-size: 20px;
+	background-color: lightskyblue;
+	color: black;
 	border: 1px solid gray;
 }
 

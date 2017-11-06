@@ -161,6 +161,11 @@ new Vue({
 					bottom: Math.round(track.start * this.timelineScale) + 'px'
 				}));
 		},
+		playInBlock: function(block, e){
+			const start = (e.target.clientHeight - e.offsetY) / this.timelineScale;
+			const file = constants.recordingsFolder + this.selectedStation.name + '/' + block.name;
+			this.audioPlayer.playRecording(file, start, 0);
+		},
 		live: function(){
 			this.audioPlayer.playLive(this.selectedStation.stream.url);
 		},
