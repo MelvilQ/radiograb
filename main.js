@@ -7,7 +7,7 @@ const url = require('url');
 let mainWindow;
 
 function createWindow(){
-	mainWindow = new BrowserWindow();
+	mainWindow = new BrowserWindow({backgroundColor: '#4682b4'});
 	mainWindow.maximize();
 
 	mainWindow.loadURL(url.format({
