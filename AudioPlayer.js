@@ -1,3 +1,6 @@
+const moment = require('moment');
+const constants = require('./constants');
+
 class AudioPlayer {
 
 	constructor() {
@@ -6,65 +9,60 @@ class AudioPlayer {
 		this.isPlaying = false;
 		this.isPaused = false;
 		this.volume = 100;
+		this.playingPosition = null;
 	}
 
-	playLive(url){
+	play(source, start, end) {
 		if(this.audio){
 			this.stop();
 		}
-		this.audio = new Audio(url);
+		this.audio = new Audio(source);
 		this.applyVolume();
+		this.start = start ? start : null;
+		this.audio.currentTime = start ? start : 0;
+		this.playingPosition = start ? start : 0;
+		this.end = end ? end : null;
+		this.audio.addEventListener('timeupdate', () => {
+			this.playingPosition = this.audio ? this.audio.currentTime : null;
+			if(this.audio && this.end && this.audio.currentTime >= this.end){
+				this.stop();
+			}
+		});
 		this.audio.play();
 		this.isPlaying = true;
+	}
+
+	playLive(url) {
 		this.mode = 'live';
+		this.play(url);
 	}
 
-	playRecording(file, start, offset, duration){
-		if(this.audio){
-			this.stop();
-		}
-		if(!offset){
-			offset = 0;
-		}
-		this.audio = new Audio(file);
-		this.applyVolume();
-		this.audio.currentTime = start + offset;
-		this.audio.play();
-		this.isPlaying = true;
-		if(duration){
-			this.timeout = setTimeout(() => this.stop(), duration*1000);
-		}
+	playTrack(track, stationName){
 		this.mode = 'track';
+		this.file = track.take;
+		const path = constants.recordingsFolder + stationName + '/' + track.take;
+		this.play(path, track.start, track.end);
 	}
 
 	playTimeline(block, start){
-		if(this.audio){
-			this.stop();
-		}
-		this.audio = new Audio(block.file);
-		this.applyVolume();
-		this.audio.currentTime = start;
-		this.audio.play();
-		this.isPlaying = true;
+		this.mode = 'timeline';
+		this.block = block;
+		this.file = block.name;
+		this.play(block.file, start);
+		
 		if(block.live){
 			// in live mode, from time to time we have to reload the file 
 			// because it is currently written and we need the new data
 			this.audio.addEventListener('ended', () => {
 				this.playTimeline(block, this.audio.currentTime);
 			});
-		}
-		this.mode = 'timeline';
-	}
-
-	minus5(){
-		if(this.audio && this.isPlaying){
-			this.audio.currentTime -= 5000;
-		}
-	}
-
-	plus5(){
-		if(this.audio && this.isPlaying){
-			this.audio.currentTime += 5000;
+		} else {
+			this.audio.addEventListener('ended', () => {
+				this.isPlaying = false;
+				this.isPaused = false;
+				this.audio = null;
+				this.mode = null;
+			});
 		}
 	}
 
@@ -79,10 +77,6 @@ class AudioPlayer {
 	pause(){
 		if(this.audio && this.isPlaying){
 			this.audio.pause();
-			if(this.timeout){
-				clearTimeout(this.timeout);
-				this.timeout = null;
-			}
 			this.isPlaying = false;
 			this.isPaused = true;
 		}
@@ -92,10 +86,7 @@ class AudioPlayer {
 		if(this.audio){
 			this.audio.pause();
 			this.isPlaying = false;
-		}
-		if(this.timeout){
-			clearTimeout(this.timeout);
-			this.timeout = null;
+			this.isPaused = false;
 		}
 		this.audio = null;
 		this.mode = null;
@@ -105,6 +96,26 @@ class AudioPlayer {
 		if(this.audio){
 			this.audio.volume = this.volume / 100;
 		}
+	}
+
+	getProgress(){
+		if(!this.audio || !this.start || !this.end){
+			return undefined;
+		}
+		return ((this.audio.currentTime - this.start) / (this.end - this.start));
+	}
+
+	getCurrentPlayingTime(){
+		if(!this.audio){
+			return undefined;
+		}
+		let time;
+		if(this.mode === 'live'){
+			time = moment();
+		} else {
+			time = moment(parseInt(this.file.replace('.mp3')) + this.audio.currentTime);
+		} 
+		return time.format('D.M.YYYY H:mm');
 	}
 
 }

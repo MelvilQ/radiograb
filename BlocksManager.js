@@ -31,7 +31,7 @@ class BlocksManager {
 				start: moment(timestampStart),
 				end: moment(timestampEnd),
 				length: duration,
-				live: moment().isAfter(moment(timestampEnd + 3000)) // probably applies for the current recording
+				live: moment().isBefore(moment(timestampEnd + 3000)) // probably applies for the current recording
 			};
 			this.blocks.push(block);
 		}

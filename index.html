@@ -45,8 +45,6 @@
 					</button>
 				</span>
 				<button @click="live" :disabled="!isLivePossible">Live</button>
-				<button @click="audioPlayer.minus5()" v-show="audioPlayer.isPlaying">-5</button>
-				<button @click="audioPlayer.plus5()" v-show="audioPlayer.isPlaying">+5</button>
 				<button @click="audioPlayer.pause()" v-show="audioPlayer.isPlaying">Pause</button>
 				<button @click="audioPlayer.continue()" v-show="audioPlayer.isPaused">Play</button>
 				<input type="range" min="0" max="100" v-model="audioPlayer.volume">
@@ -130,23 +128,31 @@
 
 		<!-- timeline -->
 		<div class="timeline-area" v-if="selectedStation" v-show="displayMode === 'timeline'">
-			<div v-if="blocks && blocks.length" >
+			<div v-if="blocks && blocks.length">
+				<!-- block -->
 				<div v-for="(block, i) in blocks" 
 					 class="timeline-block">
 					<div class="timeline-block-end">
 						{{block.end.format('D.M.YYYY H:mm')}}
 					</div>
 					<div class="timeline-block-inner" 
-						 @click="playInBlock(block, $event)" 
+						 @click.stop="playInBlock(block, $event)" 
 						 :style="{height: blockHeights[i]}">
+						<!-- track -->
 						<div v-for="track in getTracksOfBlock(block.name)"
 							 class="timeline-track"
 							 :title="track.artist + ' - ' + track.title"
 							 :style="{height: track.height, bottom: track.bottom}"
-							 @click="selectTrackAndPlay(track)">
+							 @click.stop="selectTrackAndPlay(track)">
 							<span v-if="parseInt(track.height) > 24">
 								{{track.artist}} - {{track.title}}
 							</span>
+						</div>
+						<!-- arrow -->
+						<div v-if="audioPlayer.audio && audioPlayer.file === block.name" 
+							 class="timeline-arrow"
+							 :title="currentPlayingTime"
+							 :style="{bottom: arrowPosition}">
 						</div>
 					</div>
 					<div class="timeline-block-start">

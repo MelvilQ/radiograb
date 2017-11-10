@@ -19,7 +19,7 @@ new Vue({
 		searchTerm: '',
 		sortColumn: 'time',
 		sortOrder: 'desc',
-		timelineScale: 0.4,
+		timelineScale: 1.0,
 		editTrackDialog: {
 			visible: false,
 			track: null,
@@ -62,6 +62,15 @@ new Vue({
 		},
 		isLivePossible: function(){
 			return (!!this.selectedStation && this.selectedStation.recording);
+		},
+		currentPlayingTime: function(){
+			return this.audioPlayer.getCurrentPlayingTime();
+		},
+		arrowPosition: function(){
+			if(!this.audioPlayer.isPlaying && !this.audioPlayer.isPaused){
+				return null;
+			}
+			return Math.round(this.audioPlayer.playingPosition * this.timelineScale) + 'px';
 		}
 	},
 	methods: {
@@ -98,9 +107,7 @@ new Vue({
 		},
 		selectTrackAndPlay: function(track){
 			this.selectTrack(track);
-			const file = constants.recordingsFolder + this.selectedStation.name 
-				+ '/' + track.take;
-			this.audioPlayer.playRecording(file, track.start, this.selectedStation.offset, track.getLength());
+			this.audioPlayer.playTrack(track, this.selectedStation.name);
 		},
 		openEditTrackDialog: function(track){
 			this.editTrackDialog.track = track;
@@ -163,8 +170,7 @@ new Vue({
 		},
 		playInBlock: function(block, e){
 			const start = (e.target.clientHeight - e.offsetY) / this.timelineScale;
-			const file = constants.recordingsFolder + this.selectedStation.name + '/' + block.name;
-			this.audioPlayer.playRecording(file, start, 0);
+			this.audioPlayer.playTimeline(block, start);
 		},
 		live: function(){
 			this.audioPlayer.playLive(this.selectedStation.stream.url);

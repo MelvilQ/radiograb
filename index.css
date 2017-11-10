@@ -204,6 +204,14 @@ div.timeline-track {
 	border: 1px solid gray;
 }
 
+div.timeline-arrow {
+	position: absolute;
+	margin-left: -70px;
+	width: calc(100% + 140px);
+	height: 2px;
+	background-color: black;
+}
+
 div.message {
 	padding: 20px;
 	font-weight: bold;
