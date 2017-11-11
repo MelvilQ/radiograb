@@ -146,6 +146,7 @@ td {
 	text-align: left;
 	overflow: hidden;
 	white-space: nowrap;
+	cursor: pointer;
 }
 
 td.artist-column {
@@ -191,6 +192,7 @@ div.timeline-block-start, div.timeline-block-end {
 div.timeline-block-inner {
 	position: relative;
 	background-color: deepskyblue;
+	cursor: pointer;
 }
 
 div.timeline-track {
@@ -202,6 +204,7 @@ div.timeline-track {
 	background-color: lightskyblue;
 	color: black;
 	border: 1px solid gray;
+	cursor: pointer;
 }
 
 div.timeline-arrow {
@@ -209,6 +212,11 @@ div.timeline-arrow {
 	margin-left: -70px;
 	width: calc(100% + 140px);
 	height: 2px;
+	background-color: black;
+	text-align: center;
+}
+
+div.timeline-arrow span {
 	background-color: black;
 }
 

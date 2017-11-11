@@ -64,7 +64,7 @@ new Vue({
 			return (!!this.selectedStation && this.selectedStation.recording);
 		},
 		currentPlayingTime: function(){
-			return this.audioPlayer.getCurrentPlayingTime();
+			return this.audioPlayer.currentPlayingTime;
 		},
 		arrowPosition: function(){
 			if(!this.audioPlayer.isPlaying && !this.audioPlayer.isPaused){

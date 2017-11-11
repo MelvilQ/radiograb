@@ -10,6 +10,7 @@ class AudioPlayer {
 		this.isPaused = false;
 		this.volume = 100;
 		this.playingPosition = null;
+		this.currentPlayingTime = null;
 	}
 
 	play(source, start, end) {
@@ -24,6 +25,7 @@ class AudioPlayer {
 		this.end = end ? end : null;
 		this.audio.addEventListener('timeupdate', () => {
 			this.playingPosition = this.audio ? this.audio.currentTime : null;
+			this.updateCurrentPlayingTime();
 			if(this.audio && this.end && this.audio.currentTime >= this.end){
 				this.stop();
 			}
@@ -100,14 +102,14 @@ class AudioPlayer {
 
 	getProgress(){
 		if(!this.audio || !this.start || !this.end){
-			return undefined;
+			return null;
 		}
 		return ((this.audio.currentTime - this.start) / (this.end - this.start));
 	}
 
-	getCurrentPlayingTime(){
+	updateCurrentPlayingTime(){
 		if(!this.audio){
-			return undefined;
+			this.currentPlayingTime = null;
 		}
 		let time;
 		if(this.mode === 'live'){
@@ -115,7 +117,7 @@ class AudioPlayer {
 		} else {
 			time = moment(parseInt(this.file.replace('.mp3')) + 1000 * this.audio.currentTime);
 		} 
-		return time.format('D.M.YYYY H:mm');
+		this.currentPlayingTime = time.format('D.M.YYYY H:mm:ss');
 	}
 
 }
