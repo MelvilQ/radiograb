@@ -34,10 +34,10 @@ class AudioPlayer {
 		this.isPlaying = true;
 	}
 
-	playLive(url) {
+	playLive(station) {
 		this.mode = 'live';
 		this.file = null;
-		this.play(url);
+		this.play(station.stream.url);
 	}
 
 	playTrack(track, stationName){

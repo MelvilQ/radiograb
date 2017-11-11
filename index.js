@@ -79,6 +79,20 @@ new Vue({
 		selectStation: function(station){
 			this.selectedStation = station;
 			this.settingsManager.setLastStation(station);
+			if(this.audioPlayer.isPlaying){
+				this.playSomethingOfNewStation();
+			}
+		},
+		playSomethingOfNewStation: function(){
+			if(this.audioPlayer.mode === 'live' && this.selectedStation.recording){
+				this.live();
+			} else if(this.audioPlayer.mode === 'track' && this.tracks.length){
+				this.selectTrackAndPlay(this.tracks[0]);
+			} else if(this.audioPlayer.mode === 'timeline' && this.blocks.length){
+				this.audioPlayer.playTimeline(this.blocks[0], 0);
+			} else {
+				this.audioPlayer.stop();
+			}
 		},
 		showTimeline: function(){
 			this.displayMode = 'timeline';
@@ -88,13 +102,16 @@ new Vue({
 		},
 		startRecordingAndPlay: async function(){
 			await this.selectedStation.recorder.record();
-			this.audioPlayer.playLive(this.selectedStation.stream.url);
+			this.live();
 			this.stationManager.saveStations();
 		},
 		stopRecordingAndStop: function(){
 			this.selectedStation.recorder.stop();
 			this.audioPlayer.stop();
 			this.stationManager.saveStations();
+		},
+		live: function(){
+			this.audioPlayer.playLive(this.selectedStation);
 		},
 		changeSorting: function(column){
 			if(this.sortColumn === column){
@@ -173,9 +190,6 @@ new Vue({
 		playInBlock: function(block, e){
 			const start = (e.target.clientHeight - e.offsetY) / this.timelineScale;
 			this.audioPlayer.playTimeline(block, start);
-		},
-		live: function(){
-			this.audioPlayer.playLive(this.selectedStation.stream.url);
 		},
 		open // opens a link in the default web browser
 	},

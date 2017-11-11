@@ -23,7 +23,7 @@
             "url": "http://mp3.ffh.de/fs_radioffh/hqlivestream.mp3",
             "format": "mp3"
         },
-        "recording": false,
+        "recording": true,
         "songInfo": {
             "method": "http",
             "url": "https://webradio.ffh.de/custom/getStationSonginfos.php?station=ffh",
@@ -40,7 +40,7 @@
             "url": "http://mp3.planetradio.de/fs_planetradio/hqlivestream.mp3",
             "format": "mp3"
         },
-        "recording": false,
+        "recording": true,
         "songInfo": {
             "method": "http",
             "url": "https://webradio.planetradio.de/custom/getStationSonginfos.php?station=planet",
