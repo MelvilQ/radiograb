@@ -45,6 +45,8 @@ new Vue({
 				return this.selectedStation.recorder.currentTrack;
 			} else if(this.audioPlayer.mode === 'track'){
 				return this.selectedTrack;
+			} else {
+				return null;
 			}
 		},
 		tracks: function() {

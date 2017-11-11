@@ -36,6 +36,7 @@ class AudioPlayer {
 
 	playLive(url) {
 		this.mode = 'live';
+		this.file = null;
 		this.play(url);
 	}
 
@@ -48,7 +49,6 @@ class AudioPlayer {
 
 	playTimeline(block, start){
 		this.mode = 'timeline';
-		this.block = block;
 		this.file = block.name;
 		this.play(block.file, start);
 		
@@ -91,7 +91,6 @@ class AudioPlayer {
 			this.isPaused = false;
 		}
 		this.audio = null;
-		this.mode = null;
 	}
 
 	applyVolume(){
@@ -110,6 +109,7 @@ class AudioPlayer {
 	updateCurrentPlayingTime(){
 		if(!this.audio){
 			this.currentPlayingTime = null;
+			return;
 		}
 		let time;
 		if(this.mode === 'live'){
