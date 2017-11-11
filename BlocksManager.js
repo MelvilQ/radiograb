@@ -25,13 +25,16 @@ class BlocksManager {
 			const duration = await mp3Duration(filePath);
 			const timestampStart = parseInt(recording.replace('.' + this.format));
 			const timestampEnd = timestampStart + 1000 * duration;
+			if(moment().isBefore(moment(timestampEnd + 3000))){
+				continue; // probably applies for the current recording which is treated extra
+			}
 			const block = {
 				name: recording,
 				file: filePath,
 				start: moment(timestampStart),
 				end: moment(timestampEnd),
 				length: duration,
-				live: moment().isBefore(moment(timestampEnd + 3000)) // probably applies for the current recording
+				live: false 
 			};
 			this.blocks.push(block);
 		}

@@ -113,7 +113,7 @@ class AudioPlayer {
 		if(this.mode === 'live'){
 			time = moment();
 		} else {
-			time = moment(parseInt(this.file.replace('.mp3')) + this.audio.currentTime);
+			time = moment(parseInt(this.file.replace('.mp3')) + 1000 * this.audio.currentTime);
 		} 
 		return time.format('D.M.YYYY H:mm');
 	}
