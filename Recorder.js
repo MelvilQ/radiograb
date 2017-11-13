@@ -51,7 +51,7 @@ class Recorder {
 			if(!artist || !title){
 				return;
 			}
-			const elapsed = moment().diff(this.startOfStream, 'seconds', true).toFixed(1);
+			const elapsed = parseFloat(moment().diff(this.startOfStream, 'seconds', true).toFixed(1));
 			const timeStr = moment().format('D.M.YYYY H:mm');
 			if(this.currentTrack && this.currentTrack.artist === artist && this.currentTrack.title === title){
 				return;		
@@ -74,7 +74,7 @@ class Recorder {
 		if (!this.currentTrack){
 			return;
 		}
-		this.currentTrack.end = moment().diff(this.startOfStream, 'seconds', true).toFixed(1);
+		this.currentTrack.end = parseFloat(moment().diff(this.startOfStream, 'seconds', true).toFixed(1));
 		this.trackListManager.addTrack(this.currentTrack);
 	}
 }

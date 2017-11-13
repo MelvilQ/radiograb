@@ -139,8 +139,8 @@ new Vue({
 		submitEditTrackDialog: function(){
 			this.editTrackDialog.track.artist = this.editTrackDialog.artist;
 			this.editTrackDialog.track.title = this.editTrackDialog.title;
-			this.editTrackDialog.track.start = this.editTrackDialog.start;
-			this.editTrackDialog.track.end = this.editTrackDialog.end;
+			this.editTrackDialog.track.start = parseFloat(this.editTrackDialog.start);
+			this.editTrackDialog.track.end = parseFloat(this.editTrackDialog.end);
 			this.editTrackDialog.track.edited = true;
 			this.selectedStation.trackListManager.saveTracks();
 			this.editTrackDialog.visible = false;
@@ -150,13 +150,13 @@ new Vue({
 		},
 		testCutStart: function(){
 			const track = this.editTrackDialog.track;
-			const file = constants.recordingsFolder + this.selectedStation.name + '/' + track.take;
-			this.audioPlayer.playRecording(file, this.editTrackDialog.start, this.selectedStation.offset, 4);
+			const start = parseFloat(this.editTrackDialog.start);
+			this.audioPlayer.playTrackCut(track, this.selectedStation.name, start);
 		},
 		testCutEnd: function(){
 			const track = this.editTrackDialog.track;
-			const file = constants.recordingsFolder + this.selectedStation.name + '/' + track.take;
-			this.audioPlayer.playRecording(file, this.editTrackDialog.end - 4, this.selectedStation.offset, 4);
+			const end = parseFloat(this.editTrackDialog.end);
+			this.audioPlayer.playTrackCut(track, this.selectedStation.name, end);
 		},
 		openSaveFolderPicker: function() {
 			document.getElementById('folderPicker').click();

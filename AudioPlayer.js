@@ -47,6 +47,13 @@ class AudioPlayer {
 		this.play(path, track.start, track.end);
 	}
 
+	playTrackCut(track, stationName, start){
+		this.mode = 'track';
+		this.file = track.take;
+		const path = constants.recordingsFolder + stationName + '/' + track.take;
+		this.play(path, start, start + 4);
+	}
+	
 	playTimeline(block, start){
 		this.mode = 'timeline';
 		this.file = block.name;
