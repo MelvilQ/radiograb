@@ -184,6 +184,10 @@ new Vue({
 		cancelEditTrackDialog: function(){
 			this.editTrackDialog.visible = false;
 		},
+		deleteEditedTrack: function(){
+			this.selectedStation.trackListManager.removeTrack(this.editTrackDialog.track);
+			this.editTrackDialog.visible = false;
+		},
 		testCutStart: function(){
 			const track = this.editTrackDialog.track;
 			const start = parseFloat(this.editTrackDialog.start);

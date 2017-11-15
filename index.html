@@ -230,6 +230,11 @@
 							@click="cancelEditTrackDialog">
 						Cancel
 					</button>
+					<button class="delete"
+							type="button"
+							@click="deleteEditedTrack">
+						Delete Track
+					</button>
 					<button class="ok" 
 							type="submit"
 							:disabled="!editTrackDialog.artist || !editTrackDialog.title">
