@@ -15,10 +15,12 @@ button {
 	color: white;
 	font-family: 'Rajdhani', sans-serif;
 	font-size: 18px;
+	cursor: pointer;
 }
 
 button:disabled {
 	background-color: gray;
+	cursor: default;
 }
 
 div.player-box {

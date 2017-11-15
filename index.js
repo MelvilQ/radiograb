@@ -4,7 +4,7 @@ const StationManager = require('./StationManager');
 const SettingsManager = require('./SettingsManager');
 const AudioPlayer = require('./AudioPlayer');
 const TrackCutter = require('./TrackCutter');
-const constants = require('./constants');
+const Track = require('./Track');
 
 new Vue({
 	el: '#app',
@@ -20,6 +20,15 @@ new Vue({
 		sortColumn: 'time',
 		sortOrder: 'desc',
 		timelineScale: 1.0,
+		newTrackDialog: {
+			visible: false,
+			artist: null,
+			title: null,
+			start: null,
+			end: null,
+			take: null,
+			blockStart: null
+		},
 		editTrackDialog: {
 			visible: false,
 			track: null,
@@ -127,6 +136,33 @@ new Vue({
 		selectTrackAndPlay: function(track){
 			this.selectTrack(track);
 			this.audioPlayer.playTrack(track, this.selectedStation.name);
+		},
+		openNewTrackDialog: function(block, e){
+			const start = (e.target.clientHeight - e.offsetY) / this.timelineScale;
+			this.newTrackDialog.artist = '';
+			this.newTrackDialog.title = '';
+			this.newTrackDialog.start = Math.round(Math.max(start - 90, 0));
+			this.newTrackDialog.end = Math.round(Math.min(start + 90, block.length));
+			this.newTrackDialog.take = block.name;
+			this.newTrackDialog.blockStart = block.start;
+			this.newTrackDialog.visible = true;
+		},
+		submitNewTrackDialog: function(){
+			const start = parseFloat(this.newTrackDialog.start);
+			const end = parseFloat(this.newTrackDialog.end);
+			const track = new Track(
+				this.newTrackDialog.artist, 
+				this.newTrackDialog.title,
+				start,
+				this.newTrackDialog.blockStart.add(start).format('D.M.YYYY H:mm'),
+				this.newTrackDialog.take
+			);
+			track.end = end;
+			this.selectedStation.trackListManager.addTrack(track);
+			this.newTrackDialog.visible = false;
+		},
+		cancelNewTrackDialog: function(){
+			this.newTrackDialog.visible = false;
 		},
 		openEditTrackDialog: function(track){
 			this.editTrackDialog.track = track;
