@@ -49,5 +49,22 @@
                 "title": "/current/title"
             }
         }
+    },
+    {
+        "name": "Vibration",
+        "logo": "http://ecouter.lesindesradios.fr/logos/orange100.png",
+        "stream": {
+            "url": "https://vibration.ice.infomaniak.ch/vibration-high.mp3",
+            "format": "mp3"
+        },
+        "songInfo": {
+            "method": "http",
+            "url": "http://www.vibration.fr/players/index/gettitrageplayer/idplayers/2174546520932614856",
+            "tags": {
+                "artist": "/artist",
+                "title": "/title"
+            }
+        },
+        "recording": false
     }
 ]

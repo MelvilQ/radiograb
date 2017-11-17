@@ -91,7 +91,9 @@
 				</table>
 				<table class="tracklist-body">
 					<tr v-for="track in tracks" 
-						@click="selectTrackAndPlay(track)">
+						@click="selectTrackAndPlay(track)"
+						class="track"
+						:class="{edited: track.edited}">
 						<td class="artist-column">{{track.artist}}</td>
 						<td class="title-column">{{track.title}}</td>
 						<td class="length-column">{{track.getLengthAsString()}}</td>
@@ -142,6 +144,7 @@
 						<!-- track -->
 						<div v-for="track in getTracksOfBlock(block.name)"
 							 class="timeline-track"
+							 :class="{edited: track.edited}"
 							 :title="track.artist + ' - ' + track.title"
 							 :style="{height: track.height, bottom: track.bottom}"
 							 @click.stop="selectTrackAndPlay(track)"

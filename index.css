@@ -142,6 +142,11 @@ table.tracklist-body tr:nth-child(2n+1) {
 	background-color: lightsteelblue;
 }
 
+tr.track.edited {
+	color: navy;
+	font-weight: bold;
+}
+
 td {
 	display: inline-block;
 	padding: 3px 6px;
@@ -207,6 +212,11 @@ div.timeline-track {
 	color: black;
 	border: 1px solid gray;
 	cursor: pointer;
+}
+
+div.timeline-track.edited {
+	color: navy;
+	font-weight: bold;
 }
 
 div.timeline-arrow {
