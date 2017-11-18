@@ -22,7 +22,7 @@ class BlocksManager {
 				continue;
 			}
 			const filePath = folder + '/' + recording;
-			const duration = await mp3Duration(filePath);
+			const duration = await this.determineDuration(filePath);
 			const timestampStart = parseInt(recording.replace('.' + this.format));
 			const timestampEnd = timestampStart + 1000 * duration;
 			const block = {
@@ -34,6 +34,13 @@ class BlocksManager {
 			};
 			this.blocks.push(block);
 		}
+	}
+
+	async determineDuration(filePath){
+		if(this.format === 'mp3'){
+			return await mp3Duration(filePath);
+		}
+		return null;
 	}
 
 	addBlock(block){

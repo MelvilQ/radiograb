@@ -32,7 +32,7 @@ class StationManager {
 	async saveStations() {
 		// don't serialize trackListManager and recorder
 		const stations = this.stations.map(
-			station => _.omit(station, ['trackListManager', 'recorder', 'blocksManager'])
+			station => _.omit(station, ['trackListManager', 'blocksManager', 'recorder'])
 		);
 		await fs.writeFile(constants.stationsFile, JSON.stringify(stations, null, 4));
 	}

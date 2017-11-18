@@ -10,7 +10,8 @@ class Recorder {
 
 	constructor(station){
 		this.station = station;
-		this.trackListManager = station.trackListManager;		
+		this.trackListManager = station.trackListManager;
+		this.blocksManager = station.blocksManager;		
 		this.stationFolder = constants.recordingsFolder + this.station.name;
 		this.currentTrack = null;
 		this.startOfStream = null;	
