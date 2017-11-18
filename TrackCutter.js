@@ -6,7 +6,9 @@ class TrackCutter {
 	async saveTrack(track, station, outputFolder){
 		const source = constants.recordingsFolder + station.name + '/' + track.take;
 		const dest = outputFolder + '/' + track.artist + ' - ' + track.title + '.' + station.stream.format;
-		const cmd = 'ffmpeg -i "' + source + '" -ss ' + track.start + ' -to ' + track.end + ' -y "' + dest + '"';
+		const cmd = 'ffmpeg -i "' + source + '" -ss ' + track.start + ' -to ' + track.end 
+			+ ' -metadata artist="' + track.artist + '" -metadata title="' + track.title + '"'
+			+ ' -y "' + dest + '"';
 		try {
 			await exec(cmd);
 		} catch(e){
