@@ -1,4 +1,5 @@
 const moment = require('moment');
+const _ = require('lodash');
 const constants = require('./constants');
 
 class AudioPlayer {
@@ -17,7 +18,7 @@ class AudioPlayer {
 		if(this.audio){
 			this.stop();
 		}
-		this.audio = new Audio(source);
+		this.audio = new Audio(source + '?' + _.random(10000000)); // prevent caching to ensure that rollover works
 		this.applyVolume();
 		this.start = start ? start : null;
 		this.audio.currentTime = start ? start : 0;
@@ -32,6 +33,7 @@ class AudioPlayer {
 		});
 		this.audio.play();
 		this.isPlaying = true;
+		this.isPaused = false;
 	}
 
 	playLive(station) {
@@ -54,16 +56,19 @@ class AudioPlayer {
 		this.play(path, start, start + 4);
 	}
 	
-	playTimeline(block, start){
+	playTimeline(block, start, isLive){
 		this.mode = 'timeline';
 		this.file = block.file;
 		this.play(block.path, start);
 		
-		if(block.live){
-			// in live mode, from time to time we have to reload the file 
-			// because it is currently written and we need the new data
+		if(isLive){
+			// in live mode we have to reload the file from time to time (rollover)
+			// because the HTML5 player does not pull the new data automatically
 			this.audio.addEventListener('ended', () => {
-				this.playTimeline(block, this.audio.currentTime);
+				if(this.audio){
+					console.log('rollover playing live block');
+					this.playTimeline(block, this.audio.currentTime, true);
+				}
 			});
 		} else {
 			this.audio.addEventListener('ended', () => {

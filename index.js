@@ -72,7 +72,7 @@ new Vue({
 				.map(block => Object.assign({}, block, {
 					height: Math.round(block.duration * this.timelineScale) + 'px',
 					startTime: moment(block.start).format('D.M.YYYY H:mm'),
-					endTime: moment(block.start + block.duration).format('D.M.YYYY H:mm')
+					endTime: moment(block.start + block.duration * 1000).format('D.M.YYYY H:mm')
 				}));
 		}, 
 		isLivePossible: function(){
@@ -249,9 +249,9 @@ new Vue({
 					ref: track // reference to original object, otherwise we cannot edit from the timeline
 				}));
 		},
-		playInBlock: function(block, e){
+		playInBlock: function(block, e, isLive){
 			const start = (e.target.clientHeight - e.offsetY) / this.timelineScale;
-			this.audioPlayer.playTimeline(block, start);
+			this.audioPlayer.playTimeline(block, start, isLive);
 		},
 		applySettings: function(){
 			let candidates;

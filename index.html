@@ -144,7 +144,7 @@
 					Live
 				</div>
 				<div class="timeline-block-inner live-block"
-					 @click.stop="playInBlock(liveBlock, $event)"
+					 @click.stop="playInBlock(liveBlock, $event, true)"
 					 @contextmenu.prevent.stop="openNewTrackDialog(liveBlock, $event)" 
 					 :style="{height: liveBlock.height}">
 					<!-- tracks -->

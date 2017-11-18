@@ -1,8 +1,8 @@
 {
-    "lastStation": "Planet Radio",
+    "lastStation": "Radio FG",
     "volume": "25",
     "property": "value",
     "saveFolder": "/home/melvil/Downloads",
     "displayMode": "timeline",
-    "timelineScale": 0.15258789062499994
+    "timelineScale": 6.5536
 }
