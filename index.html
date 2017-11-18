@@ -198,12 +198,18 @@
 				<div>
 					<label>Start</label>
 					<input type="number" step="0.1" v-model="newTrackDialog.start">
-					<button type="button" @click="testCutStart">Test</button>
+					<button type="button" 
+							@click="testCut(newTrackDialog.take, newTrackDialog.start)">
+						Test
+					</button>
 				</div>
 				<div>
 					<label>End</label>
 					<input type="number" step="0.1" v-model="newTrackDialog.end">
-					<button type="button" @click="testCutEnd">Test</button>
+					<button type="button" 
+							@click="testCut(newTrackDialog.take, newTrackDialog.end)">
+						Test
+					</button>
 				</div>
 				<div>
 					<button class="cancel" 
@@ -229,12 +235,18 @@
 				<div>
 					<label>Start</label>
 					<input type="number" step="0.1" v-model="editTrackDialog.start">
-					<button type="button" @click="testCutStart">Test</button>
+					<button type="button" 
+							@click="testCut(editTrackDialog.track.take, editTrackDialog.start)">
+						Test
+					</button>
 				</div>
 				<div>
 					<label>End</label>
 					<input type="number" step="0.1" v-model="editTrackDialog.end">
-					<button type="button" @click="testCutEnd">Test</button>
+					<button type="button" 
+							@click="testCut(editTrackDialog.track.take, editTrackDialog.end)">
+						Test
+					</button>
 				</div>
 				<div>
 					<button class="cancel" 

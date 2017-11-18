@@ -47,10 +47,10 @@ class AudioPlayer {
 		this.play(path, track.start, track.end);
 	}
 
-	playTrackCut(track, stationName, start){
-		this.mode = 'track';
-		this.file = track.take;
-		const path = constants.recordingsFolder + stationName + '/' + track.take;
+	playTrackCut(take, stationName, start){
+		this.mode = 'cut';
+		this.file = take;
+		const path = constants.recordingsFolder + stationName + '/' + take;
 		this.play(path, start, start + 4);
 	}
 	

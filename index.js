@@ -164,6 +164,7 @@ new Vue({
 				this.newTrackDialog.take
 			);
 			track.end = end;
+			track.edited = true;
 			this.selectedStation.trackListManager.addTrack(track);
 			this.newTrackDialog.visible = false;
 		},
@@ -194,15 +195,9 @@ new Vue({
 			this.selectedStation.trackListManager.removeTrack(this.editTrackDialog.track);
 			this.editTrackDialog.visible = false;
 		},
-		testCutStart: function(){
-			const track = this.editTrackDialog.track;
-			const start = parseFloat(this.editTrackDialog.start);
+		testCut: function(track, testTime){
+			const start = parseFloat(testTime);
 			this.audioPlayer.playTrackCut(track, this.selectedStation.name, start);
-		},
-		testCutEnd: function(){
-			const track = this.editTrackDialog.track;
-			const end = parseFloat(this.editTrackDialog.end);
-			this.audioPlayer.playTrackCut(track, this.selectedStation.name, end);
 		},
 		openSaveFolderPicker: function() {
 			document.getElementById('folderPicker').click();
