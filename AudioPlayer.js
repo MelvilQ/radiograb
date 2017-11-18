@@ -56,8 +56,8 @@ class AudioPlayer {
 	
 	playTimeline(block, start){
 		this.mode = 'timeline';
-		this.file = block.name;
-		this.play(block.file, start);
+		this.file = block.file;
+		this.play(block.path, start);
 		
 		if(block.live){
 			// in live mode, from time to time we have to reload the file 

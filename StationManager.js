@@ -17,8 +17,10 @@ class StationManager {
 		this.stations.forEach(station => {
 			station.trackListManager = new TrackListManager(station.name);
 			station.blocksManager = new BlocksManager(station.name, station.stream.format);
+			station.blocksManager.synchronizeBlocks();
 			station.recorder = new Recorder(station);
 		});
+		this.startRecording();
 	}
 
 	startRecording(){

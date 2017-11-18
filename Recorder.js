@@ -20,7 +20,9 @@ class Recorder {
 
 	async record() {
 		await mkdirp(this.stationFolder);
-		this.audioFileName = moment().valueOf() + '.' + this.station.stream.format;
+		const blockStart = moment().valueOf();
+		this.blocksManager.notifyLiveBlockStart(blockStart);
+		this.audioFileName = blockStart + '.' + this.station.stream.format;
 		this.audioFileWriter = fs.createWriteStream(
 			this.stationFolder + '/' + this.audioFileName,
 			{encoding: 'binary'}
@@ -42,6 +44,7 @@ class Recorder {
 		console.log('stopped recording ' + this.station.name);
 		this.streamReader.pause();
 		clearInterval(this.songInfoDownloader);
+		this.blocksManager.notifyLiveBlockEnd();
 		this.addCurrentTrackToList();
 	}
 

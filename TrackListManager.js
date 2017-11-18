@@ -15,9 +15,9 @@ class TrackListManager {
 		return constants.recordingsFolder + this.name + '/tracks.json';
 	}
 
-	async loadTracks() {
+	loadTracks() {
 		try {
-			const json = await fs.readFile(this.getTracksFile());
+			const json = fs.readFileSync(this.getTracksFile());
 			this.tracks = JSON.parse(json).map(track => new Track(track));
 		} catch(e){
 			console.log('no tracks.json for station ' + this.name);

@@ -27,6 +27,16 @@ class SettingsManager {
 		this.saveSettings();
 	}
 
+	setDisplayMode(mode){
+		this.settings.displayMode = mode;
+		this.saveSettings();
+	}
+
+	setTimelineScale(scale){
+		this.settings.timelineScale = scale;
+		this.saveSettings();
+	}
+
 	async saveSettings(){
 		await fs.writeFile(constants.settingsFile, JSON.stringify(this.settings, null, 4));
 	}

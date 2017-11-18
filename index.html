@@ -130,48 +130,57 @@
 
 		<!-- timeline -->
 		<div class="timeline-area" v-if="selectedStation" v-show="displayMode === 'timeline'">
-			<div v-if="blocks && blocks.length">
-				<!-- block -->
-				<div v-for="(block, i) in blocks" 
-					 class="timeline-block">
-					<div class="timeline-block-end">
-						{{block.end.format('D.M.YYYY H:mm')}}
+			<!-- zoom buttons -->
+			<div class="timeline-controls">
+				Zoom:
+				<button type="button" @click="timelineZoomIn"><strong>+</strong></button>
+				<button type="button" @click="timelineZoomOut"><strong>-</strong></button>
+			</div>
+
+			<!-- live block -->
+			<div v-if="selectedStation.recording" class="timeline-block live-block">
+				Erstmal so...
+			</div>
+
+			<div v-else-if="!blocks.length" class="message">
+				There are no recordings yet, therefore the timeline is empty.
+			</div>
+
+			<!-- other blocks -->
+			<div v-for="block in blocks" 
+					class="timeline-block">
+				<div class="timeline-block-end">
+					{{block.endTime}}
+				</div>
+				<div class="timeline-block-inner" 
+						@click.stop="playInBlock(block, $event)"
+						@contextmenu.prevent.stop="openNewTrackDialog(block, $event)" 
+						:style="{height: block.height}">
+					<!-- tracks -->
+					<div v-for="track in getTracksOfBlock(block)"
+							class="timeline-track"
+							:class="{edited: track.edited}"
+							:title="track.artist + ' - ' + track.title"
+							:style="{height: track.height, bottom: track.bottom}"
+							@click.stop="selectTrackAndPlay(track)"
+							@contextmenu.stop.prevent="openEditTrackDialog(track.ref)">
+						<span v-if="parseInt(track.height) > 24">
+							{{track.artist}} - {{track.title}}
+						</span>
 					</div>
-					<div class="timeline-block-inner" 
-						 @click.stop="playInBlock(block, $event)"
-						 @contextmenu.prevent.stop="openNewTrackDialog(block, $event)" 
-						 :style="{height: blockHeights[i]}">
-						<!-- track -->
-						<div v-for="track in getTracksOfBlock(block.name)"
-							 class="timeline-track"
-							 :class="{edited: track.edited}"
-							 :title="track.artist + ' - ' + track.title"
-							 :style="{height: track.height, bottom: track.bottom}"
-							 @click.stop="selectTrackAndPlay(track)"
-							 @contextmenu.stop.prevent="openEditTrackDialog(track)">
-							<span v-if="parseInt(track.height) > 24">
-								{{track.artist}} - {{track.title}}
-							</span>
-						</div>
-						<!-- arrow -->
-						<div v-if="audioPlayer.audio && audioPlayer.file === block.name" 
-							 class="timeline-arrow"
-							 :title="currentPlayingTime"
-							 :style="{bottom: arrowPosition}">
-							 <span>&nbsp;{{currentPlayingTime}}&nbsp;</span>
-						</div>
-					</div>
-					<div class="timeline-block-start">
-						{{block.start.format('D.M.YYYY H:mm')}}
+					<!-- arrow -->
+					<div v-if="audioPlayer.audio && audioPlayer.file === block.file" 
+							class="timeline-arrow"
+							:title="currentPlayingTime"
+							:style="{bottom: arrowPosition}">
+							<span>&nbsp;{{currentPlayingTime}}&nbsp;</span>
 					</div>
 				</div>
+				<div class="timeline-block-start">
+					{{block.startTime}}
+				</div>
+			</div>
 				
-			</div>
-			<div v-else>
-				<div class="message">
-					There is no recording yet, so the timeline is emtpy.
-				</div>
-			</div>
 		</div>
 
 		<div v-else>

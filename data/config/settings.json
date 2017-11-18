@@ -2,5 +2,7 @@
     "lastStation": "Vibration",
     "volume": "25",
     "property": "value",
-    "saveFolder": "/home/melvil/Downloads"
+    "saveFolder": "/home/melvil/Downloads",
+    "displayMode": "tracklist",
+    "timelineScale": 4.096
 }

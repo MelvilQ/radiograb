@@ -1,5 +1,6 @@
 const Vue = require('./node_modules/vue/dist/vue');
 const open = require('open');
+const moment = require('moment');
 const StationManager = require('./StationManager');
 const SettingsManager = require('./SettingsManager');
 const AudioPlayer = require('./AudioPlayer');
@@ -65,12 +66,15 @@ new Vue({
 				this.sortOrder
 			);
 		},
-		blocks: function() {
-			return this.selectedStation.blocksManager.blocks;
-		},
-		blockHeights: function(){
-			return this.blocks.map(block => Math.round(block.length * this.timelineScale) + 'px');
-		},
+		blocks: function(){
+			return this.selectedStation.blocksManager.blocks
+				.filter(block => !!block.duration)
+				.map(block => Object.assign({}, block, {
+					height: Math.round(block.duration * this.timelineScale) + 'px',
+					startTime: moment(block.start).format('D.M.YYYY H:mm'),
+					endTime: moment(block.start + block.duration).format('D.M.YYYY H:mm')
+				}));
+		}, 
 		isLivePossible: function(){
 			return (!!this.selectedStation && this.selectedStation.recording);
 		},
@@ -105,9 +109,11 @@ new Vue({
 		},
 		showTimeline: function(){
 			this.displayMode = 'timeline';
+			this.settingsManager.setDisplayMode('timeline');
 		},
 		showTracklist: function(){
 			this.displayMode = 'tracklist';
+			this.settingsManager.setDisplayMode('tracklist');
 		},
 		startRecordingAndPlay: async function(){
 			await this.selectedStation.recorder.record();
@@ -142,9 +148,9 @@ new Vue({
 			this.newTrackDialog.artist = '';
 			this.newTrackDialog.title = '';
 			this.newTrackDialog.start = Math.round(Math.max(start - 90, 0));
-			this.newTrackDialog.end = Math.round(Math.min(start + 90, block.length));
-			this.newTrackDialog.take = block.name;
-			this.newTrackDialog.blockStart = block.start;
+			this.newTrackDialog.end = Math.round(Math.min(start + 90, block.duration));
+			this.newTrackDialog.take = block.file;
+			this.newTrackDialog.blockStart = moment(block.start);
 			this.newTrackDialog.visible = true;
 		},
 		submitNewTrackDialog: function(){
@@ -220,16 +226,50 @@ new Vue({
 			track.saved = true;
 			this.selectedStation.trackListManager.saveTracks();
 		},
-		getTracksOfBlock: function(name){
-			return this.tracks.filter(track => track.take === name)
-				.map(track => Object.assign(track, {
+		timelineZoomIn: function(){
+			this.timelineScale *= 1.6;
+			this.settingsManager.setTimelineScale(this.timelineScale);
+		},
+		timelineZoomOut: function(){
+			this.timelineScale /= 1.6;
+			this.settingsManager.setTimelineScale(this.timelineScale);
+		},
+		getTracksOfBlock: function(block){
+			return this.selectedStation.trackListManager.tracks
+				.filter(track => track.take === block.file)
+				.map(track => Object.assign({}, track, {
 					height: Math.round(track.getLength() * this.timelineScale) + 'px',
-					bottom: Math.round(track.start * this.timelineScale) + 'px'
+					bottom: Math.round(track.start * this.timelineScale) + 'px',
+					filtered: !this.tracks.includes(track),
+					ref: track // reference to original object, otherwise we cannot edit from the timeline
 				}));
 		},
 		playInBlock: function(block, e){
 			const start = (e.target.clientHeight - e.offsetY) / this.timelineScale;
 			this.audioPlayer.playTimeline(block, start);
+		},
+		applySettings: function(){
+			let candidates;
+			if (this.settings.lastStation) {
+				candidates = this.stations.filter(station => station.name === this.settings.lastStation);
+			} else {
+				candidates = this.stations;
+			}
+			if (candidates.length){
+				this.selectStation(candidates[0]);
+			}
+	
+			if (this.settings.volume){
+				this.audioPlayer.volume = this.settings.volume;
+			}
+	
+			if (this.settings.displayMode){
+				this.displayMode = this.settings.displayMode;
+			}
+	
+			if (this.settings.timelineScale){
+				this.timelineScale = this.settings.timelineScale;
+			}
 		},
 		open // opens a link in the default web browser
 	},
@@ -240,20 +280,6 @@ new Vue({
 		}
 	},
 	created: function() {
-		let candidates;
-		if (this.settings.lastStation) {
-			candidates = this.stations.filter(station => station.name === this.settings.lastStation);
-		} else {
-			candidates = this.stations;
-		}
-		if (candidates.length){
-			this.selectStation(candidates[0]);
-		}
-
-		if (this.settings.volume){
-			this.audioPlayer.volume = this.settings.volume;
-		}
-		
-		this.stationManager.startRecording();
+		this.applySettings();
 	}
 });

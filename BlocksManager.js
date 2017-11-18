@@ -1,7 +1,7 @@
 const fs = require('fs-extra');
-const moment = require('moment');
 const mp3Duration = require('mp3-duration');
 const constants = require('./constants');
+const Block = require('./Block');
 
 class BlocksManager {
 
@@ -9,42 +9,66 @@ class BlocksManager {
 		this.name = name;
 		this.format = format;
 		this.blocks = [];
+		this.liveBlock = null;
 		this.loadBlocks();
 	}
 
-	async loadBlocks(){
-		const folder = constants.recordingsFolder + this.name;
-		const recordings = await fs.readdir(folder);
-		recordings.sort();
-		recordings.reverse(); // sort filenames descending
-		for(let recording of recordings){
-			if(!recording.endsWith('.' + this.format)){
-				continue;
-			}
-			const filePath = folder + '/' + recording;
-			const duration = await this.determineDuration(filePath);
-			const timestampStart = parseInt(recording.replace('.' + this.format));
-			const timestampEnd = timestampStart + 1000 * duration;
-			const block = {
-				name: recording,
-				file: filePath,
-				start: moment(timestampStart),
-				end: moment(timestampEnd),
-				length: duration
-			};
-			this.blocks.push(block);
+	getBlocksFile(){
+		return constants.recordingsFolder + this.name + '/blocks.json';
+	}
+
+	loadBlocks(){
+		try {
+			const json = fs.readFileSync(this.getBlocksFile());
+			this.blocks = JSON.parse(json).map(block => new Block(block));
+		} catch(e){
+			console.log('no blocks.json for station ' + this.name);
 		}
 	}
 
-	async determineDuration(filePath){
+	notifyLiveBlockStart(blockStart){
+		const folder = constants.recordingsFolder + this.name;		
+		const file = blockStart + '.' + this.format;
+		const path = folder + '/' + file;
+		this.liveBlock = new Block(blockStart, file, path);
+		this.addBlock(this.liveBlock);
+	}
+
+	notifyLiveBlockEnd(){
+		this.liveBlock = null;
+		this.synchronizeBlocks();
+	}
+
+	sortBlocks(){
+		this.blocks.sort((block1, block2) => { // sort blocks descending (newest first)
+			return (parseInt(block1.name) < parseInt(block2.name))? 1 : -1;
+		});
+	}
+
+	async synchronizeBlocks(){
+		for(let block of this.blocks){
+			if(!block.duration){
+				block.duration = await this.determineDuration(block);
+				await this.saveBlocks();
+			}
+		}
+	}
+
+	async determineDuration(block){
 		if(this.format === 'mp3'){
-			return await mp3Duration(filePath);
+			return await mp3Duration(block.path);
 		}
 		return null;
 	}
 
 	addBlock(block){
-		this.blocks.push(block);
+		this.blocks.unshift(block); // we want new blocks at the top
+		this.saveBlocks();
+	}
+
+	async saveBlocks(){
+		const json = JSON.stringify(this.blocks, null, 4);
+		await fs.writeFile(this.getBlocksFile(), json);	
 	}
 }
 

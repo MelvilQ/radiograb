@@ -180,6 +180,7 @@ td.action-column {
 }
 
 div.timeline-area {
+	position: relative;
 	width: 100%;
 	background-color: steelblue;
 	color: white;
@@ -187,8 +188,24 @@ div.timeline-area {
 	overflow-y: auto;
 }
 
+div.timeline-controls {
+	position: fixed;
+	top: 170px;
+	right: 30px;
+	z-index: 3;
+	padding: 5px;
+	background-color: white;
+	color: black;
+}
+
 div.timeline-block {
 	margin: 25px 70px;
+}
+
+div.timeline-block.live-block {
+	position: relative;
+	background-color: violet;
+	cursor: pointer;
 }
 
 div.timeline-block-start, div.timeline-block-end {
