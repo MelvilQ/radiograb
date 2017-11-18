@@ -140,6 +140,9 @@
 			<!-- live block -->
 			<div v-if="liveBlock" 
 				 class="timeline-block">
+				<div class="timeline-block-end">
+					Live
+				</div>
 				<div class="timeline-block-inner live-block"
 					 @click.stop="playInBlock(liveBlock, $event)"
 					 @contextmenu.prevent.stop="openNewTrackDialog(liveBlock, $event)" 
