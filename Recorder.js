@@ -15,6 +15,7 @@ class Recorder {
 		this.stationFolder = constants.recordingsFolder + this.station.name;
 		this.currentTrack = null;
 		this.startOfStream = null;	
+		this.duration = null;
 		this.audioFileName = null;	
 	}
 
@@ -29,8 +30,12 @@ class Recorder {
 		);
 		this.streamReader = request(this.station.stream.url);
 		this.streamReader.pipe(this.audioFileWriter);
-
+		
 		this.startOfStream = moment();
+		this.duration = 0;
+		this.streamReader.on('data', () => {
+			this.duration = (moment() - this.startOfStream.valueOf()) / 1000;
+		});
 		this.station.recording = true;
 		console.log('started recording ' + this.station.name);
 		

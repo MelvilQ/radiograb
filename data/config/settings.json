@@ -1,8 +1,8 @@
 {
-    "lastStation": "Vibration",
+    "lastStation": "Planet Radio",
     "volume": "25",
     "property": "value",
     "saveFolder": "/home/melvil/Downloads",
-    "displayMode": "tracklist",
-    "timelineScale": 2.56
+    "displayMode": "timeline",
+    "timelineScale": 0.15258789062499994
 }

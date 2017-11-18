@@ -202,9 +202,9 @@ div.timeline-block {
 	margin: 25px 70px;
 }
 
-div.timeline-block.live-block {
+div.timeline-block-inner.live-block {
 	position: relative;
-	background-color: violet;
+	background-color: lightseagreen;
 	cursor: pointer;
 }
 

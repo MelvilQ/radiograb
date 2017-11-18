@@ -138,24 +138,56 @@
 			</div>
 
 			<!-- live block -->
-			<div v-if="selectedStation.recording" class="timeline-block live-block">
-				Erstmal so...
+			<div v-if="liveBlock" 
+				 class="timeline-block">
+				<div class="timeline-block-inner live-block"
+					 @click.stop="playInBlock(liveBlock, $event)"
+					 @contextmenu.prevent.stop="openNewTrackDialog(liveBlock, $event)" 
+					 :style="{height: liveBlock.height}">
+					<!-- tracks -->
+					<div v-for="track in getTracksOfBlock(liveBlock)"
+						 class="timeline-track"
+						 :class="{edited: track.edited}"
+						 :title="track.artist + ' - ' + track.title"
+						 :style="{height: track.height, bottom: track.bottom}"
+						 @click.stop="selectTrackAndPlay(track)"
+						 @contextmenu.stop.prevent="openEditTrackDialog(track.ref)">
+						<span v-if="parseInt(track.height) > 24">
+							{{track.artist}} - {{track.title}}
+						</span>
+					</div>
+					<!-- block arrow -->
+					<div v-if="audioPlayer.audio && audioPlayer.file === liveBlock.file" 
+						 class="timeline-arrow"
+						 :style="{bottom: arrowPosition}">
+				   		<span>&nbsp;{{currentPlayingTime}}&nbsp;</span>
+					</div>
+					<!-- live arrow -->
+					<div v-if="audioPlayer.audio && audioPlayer.mode === 'live'" 
+					 	 class="timeline-arrow"
+						 :style="{top: '0px'}">
+						<span>&nbsp;{{currentPlayingTime}}&nbsp;</span>
+					</div>
+				</div>
+				<div class="timeline-block-start">
+					{{liveBlock.startTime}}
+				</div>
 			</div>
-
+			
 			<div v-else-if="!blocks.length" class="message">
 				There are no recordings yet, therefore the timeline is empty.
 			</div>
 
 			<!-- other blocks -->
 			<div v-for="block in blocks" 
-					class="timeline-block">
+				 class="timeline-block">
 				<div class="timeline-block-end">
 					{{block.endTime}}
 				</div>
 				<div class="timeline-block-inner" 
-						@click.stop="playInBlock(block, $event)"
-						@contextmenu.prevent.stop="openNewTrackDialog(block, $event)" 
-						:style="{height: block.height}">
+					 @click.stop="playInBlock(block, $event)"
+					 @contextmenu.prevent.stop="openNewTrackDialog(block, $event)" 
+					 :style="{height: block.height}">
 					<!-- tracks -->
 					<div v-for="track in getTracksOfBlock(block)"
 							class="timeline-track"
@@ -170,10 +202,9 @@
 					</div>
 					<!-- arrow -->
 					<div v-if="audioPlayer.audio && audioPlayer.file === block.file" 
-							class="timeline-arrow"
-							:title="currentPlayingTime"
-							:style="{bottom: arrowPosition}">
-							<span>&nbsp;{{currentPlayingTime}}&nbsp;</span>
+						 class="timeline-arrow"
+						 :style="{bottom: arrowPosition}">
+						<span>&nbsp;{{currentPlayingTime}}&nbsp;</span>
 					</div>
 				</div>
 				<div class="timeline-block-start">

@@ -1,4 +1,4 @@
-const Vue = require('./node_modules/vue/dist/vue');
+const Vue = require('./node_modules/vue/dist/vue.min');
 const open = require('open');
 const moment = require('moment');
 const StationManager = require('./StationManager');
@@ -86,6 +86,16 @@ new Vue({
 				return null;
 			}
 			return Math.round(this.audioPlayer.playingPosition * this.timelineScale) + 'px';
+		},
+		liveBlock: function(){
+			const block = this.selectedStation.blocksManager.liveBlock;
+			if(!block){
+				return null;
+			}
+			return Object.assign({}, block, {
+				height: Math.round(this.selectedStation.recorder.duration * this.timelineScale) + 'px',
+				startTime: moment(block.start).format('D.M.YYYY H:mm')
+			});
 		}
 	},
 	methods: {
