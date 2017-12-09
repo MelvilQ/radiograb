@@ -82,6 +82,6 @@
                 "title": "/data/title"
             }
         },
-        "recording": true
+        "recording": false
     }
 ]
