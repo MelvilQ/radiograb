@@ -173,7 +173,7 @@
 						 :style="{height: track.height, bottom: track.bottom}"
 						 @click.stop="selectTrackAndPlay(track)"
 						 @contextmenu.stop.prevent="openEditTrackDialog(track.ref)">
-						<span v-if="parseInt(track.height) > 24">
+						<span v-if="parseInt(track.height) > 30">
 							{{track.artist}} - {{track.title}}
 						</span>
 					</div>

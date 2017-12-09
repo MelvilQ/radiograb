@@ -3,6 +3,6 @@
     "volume": "78",
     "property": "value",
     "saveFolder": "/home/melvil/Downloads",
-    "displayMode": "tracklist",
-    "timelineScale": 0.6249999999999999
+    "displayMode": "timeline",
+    "timelineScale": 0.3906249999999999
 }

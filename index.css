@@ -254,9 +254,10 @@ div.timeline-block-inner {
 div.timeline-track {
 	position: absolute;
 	margin-left: 70px;
-	padding-left: 30px;
-	width: calc(100% - 130px);
-	font-size: 20px;
+	padding: 0 30px; 
+	line-height: 2;
+	width: calc(100% - 160px);
+	font-size: 18px;
 	background-color: #99bbcc;
 	color: black;
 	border: 1px solid #666666;
