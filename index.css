@@ -16,6 +16,16 @@ button {
 	font-family: 'Rajdhani', sans-serif;
 	font-size: 18px;
 	cursor: pointer;
+	outline: none;
+}
+
+button:hover {
+	background-color: black;
+}
+
+button:active {
+	background-color: white;
+	color: black;
 }
 
 button:disabled {
@@ -31,14 +41,12 @@ div.player-box {
 div.current-track-box {
 	float: left;
 	line-height: 25px;
-	vertical-align: middle;
 	margin: 10px;
 }
 
 div.player-buttons {
 	float: right;
 	line-height: 70px;
-	vertical-align: middle;	
 }
 
 span.selected-station-info {
@@ -66,6 +74,7 @@ input[type=range] {
 	width: 80px;
 	height: 30px;
 	margin: 20px;
+	margin-left: 10px;
 	padding: 0;
 }
 
@@ -113,9 +122,12 @@ table.tracklist-head, table.tracklist-body {
 }
 
 table.tracklist-head {
-	background-color: steelblue;
+	background-color: black;
+	color: white;
 	font-weight: bold;
 	cursor: pointer;
+	padding-top: 3px;
+	padding-bottom: 1px;
 }
 
 table.tracklist-body {
@@ -149,7 +161,7 @@ tr.track.edited {
 
 td {
 	display: inline-block;
-	padding: 3px 6px;
+	padding: 1px 6px;
 	text-align: left;
 	overflow: hidden;
 	white-space: nowrap;
@@ -191,9 +203,10 @@ div.timeline-area {
 div.timeline-controls {
 	position: fixed;
 	top: 170px;
-	right: 30px;
+	right: 35px;
 	z-index: 3;
 	padding: 5px;
+	padding-bottom: 0;
 	background-color: white;
 	color: black;
 }
@@ -255,11 +268,39 @@ div.message {
 	font-weight: bold;
 }
 
+button.icon {
+	font-family: Ionicons;
+	font-size: 18px;
+	height: 25px;
+	width: 32px;
+}
+
+button.settings-icon {
+	background-color: black;
+	color: white;
+}
+
 img.symbol {
-	height: 26px;
+	display: inline-block;
+	height: 16px;
 	cursor: pointer;
-	margin: 0;
-	padding: 0;
+	margin: 1px;
+	padding: 3px;
+	transition: height 200ms, padding 200ms;
+}
+
+img.symbol:hover {
+	height: 22px;
+	padding: 0px;
+}
+
+img.symbol:active {
+	height: 10px;
+	padding: 6px;
+}
+
+img.symbol.bar {
+	display: inline;
 }
 
 div.overlay {

@@ -6,7 +6,7 @@
             "url": "http://radiofg.impek.com/fg",
             "format": "mp3"
         },
-        "recording": false,
+        "recording": true,
         "songInfo": {
             "method": "http",
             "url": "https://api.radioking.com/radio/accounts/getcurrenttitle?app=radiofg&apikey=7cfde934f1cee6fdac926f92baadbb9fb6852f14&idsite=5079&typetitrage=web&idserveur=8&username=&host=radiofg.impek.com&port=80&radiouid=&mount=fg&url=http://radiofg.impek.com/fg",
@@ -23,7 +23,7 @@
             "url": "http://mp3.ffh.de/fs_radioffh/hqlivestream.mp3",
             "format": "mp3"
         },
-        "recording": false,
+        "recording": true,
         "songInfo": {
             "method": "http",
             "url": "https://webradio.ffh.de/custom/getStationSonginfos.php?station=ffh",
@@ -40,7 +40,7 @@
             "url": "http://mp3.planetradio.de/fs_planetradio/hqlivestream.mp3",
             "format": "mp3"
         },
-        "recording": false,
+        "recording": true,
         "songInfo": {
             "method": "http",
             "url": "https://webradio.planetradio.de/custom/getStationSonginfos.php?station=planet",
@@ -63,6 +63,23 @@
             "tags": {
                 "artist": "/artist",
                 "title": "/title"
+            }
+        },
+        "recording": true
+    },
+    {
+        "name": "Sunshine Live",
+        "logo": "http://www.sunshine-live.de/images/site/logo.svg",
+        "stream": {
+            "url": "http://sunshinelive.hoerradar.de/sunshinelive-live-mp3-hq",
+            "format": "mp3"
+        },
+        "songInfo": {
+            "method": "http",
+            "url": "http://www.sunshine-live.de/index.php?option=com_playhistory&task=current.track&format=json&stream=studio",
+            "tags": {
+                "artist": "/data/artist",
+                "title": "/data/title"
             }
         },
         "recording": false

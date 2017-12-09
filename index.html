@@ -2,15 +2,15 @@
 <html>
   
 <head>
-    <meta charset="UTF-8">
+	<meta charset="UTF-8">
+	
 	<title>RadioGrab</title>
+
 	<link href="https://fonts.googleapis.com/css?family=Rajdhani" rel="stylesheet">
-	<link rel="stylesheet" href="./index.css">
-	<script>
-		window.onload = function(){
-			require('./index.js');
-		}
-	</script>
+	<link href="./node_modules/ionicons/css/ionicons.min.css" rel="stylesheet">
+	<link href="./index.css" rel="stylesheet">
+
+	<script>window.onload = () => require('./index.js');</script>
 </head>
 
 <body>
@@ -28,25 +28,38 @@
 					{{selectedStation.name}}
 				</span>
 				<input type="text" 
-					   placeholder="Search"
+					   placeholder="Find Track"
 					   class="search-term-input" 
 					   v-model="searchTerm" 
 					   v-if="selectedStation">
 				<span v-if="selectedStation">
-					<button @click="showTimeline" v-show="displayMode === 'tracklist'">tl</button>
-					<button @click="showTracklist" v-show="displayMode === 'timeline'">tl</button>
-					<button @click="startRecordingAndPlay()" 
+					<button class="icon" @click="showTimeline" title="Timeline"
+							v-show="displayMode === 'tracklist'">&#xf391;</button>
+					<button class="icon" @click="showTracklist" title="Tracklist"
+							v-show="displayMode === 'timeline'">&#xf391;</button>
+					<button class="icon" @click="startRecordingAndPlay()" title="Start Recording"
 							v-if="!selectedStation.recording">
-						Record
+						&#xf496;
 					</button>
-					<button @click="stopRecordingAndStop()" 
+					<button class="icon" @click="stopRecordingAndStop()" title="Stop Recording"
 							v-if="selectedStation.recording">
-						Stop
+						&#xf497;
 					</button>
 				</span>
-				<button @click="live" :disabled="!isLivePossible">Live</button>
-				<button @click="audioPlayer.pause()" v-show="audioPlayer.isPlaying">Pause</button>
-				<button @click="audioPlayer.continue()" v-show="audioPlayer.isPaused">Play</button>
+				<button class="icon" title="Listen Live" 
+						@click="live" :disabled="!isLivePossible">&#xf38c;</button>
+				<button class="icon" title="Pause"
+						@click="audioPlayer.pause()" v-show="audioPlayer.isPlaying">&#xf210;</button>
+				<button class="icon" title="Play"
+						@click="audioPlayer.continue()" 
+						v-show="!audioPlayer.isPlaying" :disabled="!audioPlayer.isPaused">&#xf215;</button>
+
+				<!-- volume icon -->
+				&nbsp; &nbsp; &nbsp;
+				<button v-if="audioPlayer.volume >= 70" class="icon">&#xf257;</button>
+				<button v-else-if="audioPlayer.volume >= 35" class="icon">&#xf259;</button>
+				<button v-else class="icon">&#xf258;</button>
+				<!-- volume slider -->
 				<input type="range" min="0" max="100" v-model="audioPlayer.volume">
 			</div>
 		</div>
@@ -54,7 +67,7 @@
 		<div class="station-picker">
 			<div class="station-box" v-for="station in stations" 
 				 :class="{selected: selectedStation === station}">
-				<img class="logo" :src="station.logo" 
+				<img class="logo" :src="station.logo" :title="station.name"
 					 :class="{inactive: !station.recording}"
 					 @click="selectStation(station)">				
 			</div>
@@ -85,7 +98,8 @@
 							<span v-if="sortColumn === 'time' && sortOrder === 'desc'">&#x25BC;</span>
 						</td>
 						<td class="action-column">
-							<button @click="openSaveFolderPicker">sv</button>
+							<button class="icon settings-icon" title="Settings"
+							@click="openSaveFolderPicker">&#xf39d;</button>
 						</td>
 					</tr>
 				</table>
@@ -99,18 +113,18 @@
 						<td class="length-column">{{track.getLengthAsString()}}</td>
 						<td class="time-column">{{track.time}}</td>
 						<td class="action-column">
-							<img class="symbol"
+							<img class="symbol" title="Search on Google"
 								 @click.stop="open(track.getGoogleLink())"
-								 src="http://logok.org/wp-content/uploads/2015/09/Google-logo-2015-G-icon-640x480.png">
-						    <img class="symbol"
+								 src="img/google.png">
+						    <img class="symbol" title="Search on YouTube"
 								 @click.stop="open(track.getYoutubeLink())"
-								 src="http://logok.org/wp-content/uploads/2014/08/Youtube-logo-2017-640x480.png">
-							<img class="symbol"
+								 src="img/youtube.png">
+							<img class="symbol" title="Edit"
 								 @click.stop="openEditTrackDialog(track)"
-								 src="https://image.freepik.com/free-icon/edit-interface-symbol_318-61460.jpg">
-							<img class="symbol"
+								 src="img/edit.svg">
+							<img class="symbol" title="Save"
 								 @click.stop="saveTrack(track)"
-								 src="https://openclipart.org/download/237989/save-file.svg">
+								 src="img/save.svg">
 						</td>
 					</tr>
 				</table>
@@ -132,9 +146,9 @@
 		<div class="timeline-area" v-if="selectedStation" v-show="displayMode === 'timeline'">
 			<!-- zoom buttons -->
 			<div class="timeline-controls">
-				Zoom:
-				<button type="button" @click="timelineZoomIn"><strong>+</strong></button>
-				<button type="button" @click="timelineZoomOut"><strong>-</strong></button>
+				<img class="symbol" title="Zoom In" src="img/plus.svg" @click.stop="timelineZoomIn">
+				<img src="img/zoom.svg" height="30">
+				<img class="symbol" title="Zoom Out" src="img/minus.svg" @click.stop="timelineZoomOut">
 			</div>
 
 			<!-- live block -->

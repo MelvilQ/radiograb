@@ -7,7 +7,11 @@ const url = require('url');
 let mainWindow;
 
 function createWindow(){
-	mainWindow = new BrowserWindow({title: 'RadioGrab', backgroundColor: '#4682b4'});
+	mainWindow = new BrowserWindow({
+		icon: './img/app-icon.png',
+		title: 'RadioGrab', 
+		backgroundColor: '#4682b4'
+	});
 	mainWindow.maximize();
 
 	mainWindow.loadURL(url.format({
