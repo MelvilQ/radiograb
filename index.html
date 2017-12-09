@@ -56,9 +56,14 @@
 
 				<!-- volume icon -->
 				&nbsp; &nbsp; &nbsp;
-				<button v-if="audioPlayer.volume >= 70" class="icon">&#xf257;</button>
-				<button v-else-if="audioPlayer.volume >= 35" class="icon">&#xf259;</button>
-				<button v-else class="icon">&#xf258;</button>
+				<button @click="audioPlayer.volume = 0" 
+						v-if="audioPlayer.volume >= 70" class="icon minimal-icon">&#xf257;</button>
+				<button @click="audioPlayer.volume = 0" 
+						v-else-if="audioPlayer.volume >= 35" class="icon minimal-icon">&#xf259;</button>
+				<button @click="audioPlayer.volume = 0" 
+						v-else-if="audioPlayer.volume > 0" class="icon minimal-icon">&#xf258;</button>
+				<button @click="audioPlayer.volume = 0"
+						v-else class="icon minimal-icon">&#xf25a;</button>
 				<!-- volume slider -->
 				<input type="range" min="0" max="100" v-model="audioPlayer.volume">
 			</div>
@@ -98,7 +103,7 @@
 							<span v-if="sortColumn === 'time' && sortOrder === 'desc'">&#x25BC;</span>
 						</td>
 						<td class="action-column">
-							<button class="icon settings-icon" title="Settings"
+							<button class="icon minimal-icon" title="Settings"
 							@click="openSaveFolderPicker">&#xf39d;</button>
 						</td>
 					</tr>

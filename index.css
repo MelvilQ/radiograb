@@ -290,9 +290,7 @@ button.icon {
 	width: 32px;
 }
 
-/*td {outline: 1px solid violet;}*/
-
-button.settings-icon {
+button.minimal-icon {
 	background-color: black;
 	color: white;
 }
