@@ -23,7 +23,7 @@
             "url": "http://mp3.ffh.de/fs_radioffh/hqlivestream.mp3",
             "format": "mp3"
         },
-        "recording": true,
+        "recording": false,
         "songInfo": {
             "method": "http",
             "url": "https://webradio.ffh.de/custom/getStationSonginfos.php?station=ffh",
