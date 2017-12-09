@@ -11,7 +11,7 @@ html, body {
 
 button {
 	border: none;
-	background-color: steelblue;
+	background-color: rgb(50, 72, 90);
 	color: white;
 	font-family: 'Rajdhani', sans-serif;
 	font-size: 18px;
@@ -20,7 +20,7 @@ button {
 }
 
 button:hover {
-	background-color: black;
+	background-color: rgb(103, 149, 187);
 }
 
 button:active {
@@ -29,7 +29,7 @@ button:active {
 }
 
 button:disabled {
-	background-color: gray;
+	background-color: rgb(86, 86, 87);
 	cursor: default;
 }
 
@@ -102,7 +102,7 @@ div.station-box {
 }
 
 div.station-box:hover {
-	background-color: steelblue;
+	background-color: #5f747f;
 }
 
 div.station-box.selected {
@@ -154,15 +154,15 @@ table.tracklist-head tr, table.tracklist-body tr {
 }
 
 table.tracklist-body tr:nth-child(2n) {
-	background-color: #888888;
+	background-color: #99bbcc;
 }
 
 table.tracklist-body tr:nth-child(2n+1) {
-	background-color: #666666;
+	background-color: #85a3b2;
 }
 
 table.tracklist-body tr:hover {
-	background-color: #5388a5;
+	background-color: #5f747f;
 }
 
 table.tracklist-body tr.edited {
@@ -209,7 +209,7 @@ td.action-column {
 div.timeline-area {
 	position: relative;
 	width: 100%;
-	background-color: steelblue;
+	background-color: #5f747f;
 	color: white;
 	max-height: calc(100vh - 150px);
 	overflow-y: auto;
@@ -232,7 +232,7 @@ div.timeline-block {
 
 div.timeline-block-inner.live-block {
 	position: relative;
-	background-color: lightseagreen;
+	background-color: rgb(50, 72, 90);
 	cursor: pointer;
 }
 
@@ -243,7 +243,7 @@ div.timeline-block-start, div.timeline-block-end {
 
 div.timeline-block-inner {
 	position: relative;
-	background-color: deepskyblue;
+	background-color: #85a3b2;
 	cursor: pointer;
 }
 
@@ -253,15 +253,15 @@ div.timeline-track {
 	padding-left: 30px;
 	width: calc(100% - 130px);
 	font-size: 20px;
-	background-color: lightskyblue;
+	background-color: #99bbcc;
 	color: black;
-	border: 1px solid gray;
+	border: 1px solid #666666;
 	cursor: pointer;
 }
 
 div.timeline-track.edited {
-	color: navy;
-	font-weight: 500;
+	color: #0a254e;
+	font-weight: bold;
 }
 
 div.timeline-arrow {
