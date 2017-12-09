@@ -106,8 +106,7 @@
 				<table class="tracklist-body">
 					<tr v-for="track in tracks" 
 						@click="selectTrackAndPlay(track)"
-						class="track"
-						:class="{edited: track.edited}">
+						:class="{selected: track === selectedTrack, edited: track.edited}">
 						<td class="artist-column">{{track.artist}}</td>
 						<td class="title-column">{{track.title}}</td>
 						<td class="length-column">{{track.getLengthAsString()}}</td>

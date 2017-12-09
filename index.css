@@ -35,7 +35,8 @@ button:disabled {
 
 div.player-box {
 	height: 70px;
-	background-color: deepskyblue;
+	background-color: black;
+	color: white;
 }
 
 div.current-track-box {
@@ -54,12 +55,14 @@ span.selected-station-info {
 }
 
 input[type=text].search-term-input {
-	padding-left: 4px;
-	width: 160px;	
-	height: 26px;
-	font-size: 20px;
+	padding-left: 6px;
+	padding-right: 6px;
+	padding-top: 5px;
+	padding-bottom: 3px;
+	width: 200px;	
+	font-size: 16px;
 	font-family: 'Rajdhani', sans-serif;
-	border: 1px solid steelblue;
+	border: none;
 	border-radius: 0;
 	margin-right: 20px;
 }
@@ -83,7 +86,7 @@ div.station-picker {
 	display: flex;
 	flex-flow: row nowrap;
 	overflow-x: auto;
-	background-color: lightskyblue;
+	background-color: #242c30;
 }
 
 div.station-picker::before, div.station-picker::after {
@@ -95,11 +98,15 @@ div.station-box {
 	flex-shrink: 0;
 	margin: 10px;
 	padding: 10px;
+	background-color: white;
+}
+
+div.station-box:hover {
+	background-color: steelblue;
 }
 
 div.station-box.selected {
-	padding: 8px;
-	border: 2px solid gray;
+	background-color: black;
 }
 
 img.logo {
@@ -147,15 +154,23 @@ table.tracklist-head tr, table.tracklist-body tr {
 }
 
 table.tracklist-body tr:nth-child(2n) {
-	background-color: lightblue;
+	background-color: #888888;
 }
 
 table.tracklist-body tr:nth-child(2n+1) {
-	background-color: lightsteelblue;
+	background-color: #666666;
 }
 
-tr.track.edited {
-	color: navy;
+table.tracklist-body tr:hover {
+	background-color: #5388a5;
+}
+
+table.tracklist-body tr.edited {
+	color: #0a254e;
+}
+
+table.tracklist-body tr.selected {
+	color: black;
 	font-weight: bold;
 }
 
@@ -181,11 +196,11 @@ td.length-column {
 }
 
 td.time-column {
-	width: 9%;
+	width: 10%;
 }
 
 td.action-column {
-	width: 12%;
+	width: 11%;
 	font-size: 0;
 	text-align: right;
 	padding-right: 18px;
@@ -246,7 +261,7 @@ div.timeline-track {
 
 div.timeline-track.edited {
 	color: navy;
-	font-weight: bold;
+	font-weight: 500;
 }
 
 div.timeline-arrow {
@@ -274,6 +289,8 @@ button.icon {
 	height: 25px;
 	width: 32px;
 }
+
+/*td {outline: 1px solid violet;}*/
 
 button.settings-icon {
 	background-color: black;
