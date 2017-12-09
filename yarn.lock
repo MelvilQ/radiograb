@@ -1439,6 +1439,10 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
 
+typeface-rajdhani@^0.0.44:
+  version "0.0.44"
+  resolved "https://registry.yarnpkg.com/typeface-rajdhani/-/typeface-rajdhani-0.0.44.tgz#c19a7a4c964df4964b9ca1a8a76d93d2071ae3ee"
+
 universalify@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/universalify/-/universalify-0.1.1.tgz#fa71badd4437af4c148841e3b3b165f9e9e590b7"
