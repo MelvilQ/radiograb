@@ -71,10 +71,10 @@
 
 		<div class="station-picker">
 			<div class="station-box" v-for="station in stations" 
-				 :class="{selected: selectedStation === station}">
+				 :class="{selected: selectedStation === station}"
+				 @click="selectStation(station)">
 				<img class="logo" :src="station.logo" :title="station.name"
-					 :class="{inactive: !station.recording}"
-					 @click="selectStation(station)">				
+					 :class="{inactive: !station.recording}">				
 			</div>
 		</div>
 				

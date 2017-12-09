@@ -98,11 +98,16 @@ div.station-box {
 	flex-shrink: 0;
 	margin: 10px;
 	padding: 10px;
-	background-color: white;
+	background-color: rgb(50, 72, 90);
 }
 
 div.station-box:hover {
-	background-color: #5f747f;
+	background-color: rgb(103, 149, 187);
+	cursor: pointer;	
+}
+
+div.station-box.active {
+	background-color: white;
 }
 
 div.station-box.selected {
@@ -111,7 +116,6 @@ div.station-box.selected {
 
 img.logo {
 	height: 40px;
-	cursor: pointer;
 }
 
 img.logo.inactive {
