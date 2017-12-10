@@ -105,10 +105,7 @@
 							<span v-if="sortColumn === 'time' && sortOrder === 'asc'">&#x25B2;</span>
 							<span v-if="sortColumn === 'time' && sortOrder === 'desc'">&#x25BC;</span>
 						</td>
-						<td class="action-column">
-							<button class="icon minimal-icon" title="Settings"
-							@click="openSaveFolderPicker">&#xf39d;</button>
-						</td>
+						<td class="action-column"></td>
 					</tr>
 				</table>
 				<table class="tracklist-body">
@@ -130,7 +127,7 @@
 								 @click.stop="openEditTrackDialog(track)"
 								 src="img/edit.svg">
 							<img class="symbol" title="Save"
-								 @click.stop="saveTrack(track)"
+								 @click.stop="openSaveFileDialog(track)"
 								 src="img/save.svg">
 						</td>
 					</tr>
@@ -245,7 +242,7 @@
 		</div>
 
 		<!-- new track dialog -->
-		<div class="track-editor overlay" v-show="newTrackDialog.visible">
+		<div class="track-editor overlay" v-if="newTrackDialog.visible">
 			<button class="icon minimal-icon close" @click="cancelNewTrackDialog">&#xf129;</button>
 			<h3>Add Track</h3>
 			<form @submit.prevent="submitNewTrackDialog">
@@ -294,7 +291,7 @@
 		</div>
 
 		<!-- edit track dialog -->
-		<div class="track-editor overlay" v-show="editTrackDialog.visible">
+		<div class="track-editor overlay" v-if="editTrackDialog.visible">
 			<button class="icon minimal-icon close" @click="cancelEditTrackDialog">&#xf129;</button>
 			<h3>Edit Track</h3>
 			<form @submit.prevent="submitEditTrackDialog">
@@ -348,15 +345,44 @@
 		</div>
 
 		<!-- track extraction progress dialog -->
-		<div class="save-file overlay" v-show="saveFileDialog.visible">
+		<div class="save-file overlay" v-if="saveFileDialog.visible">
 			<button class="icon minimal-icon close" @click="saveFileDialog.visible=false">&#xf129;</button>
-			<h3>Saving Track on Disk</h3>
+			<h3>Save Track</h3>
+			<table class="form-table">
+				<tr>
+					<td class="form-label"><label>Save Path</label></td>
+					<td class="form-value">
+						{{saveFolderDisplay}}
+						&nbsp;
+						<button class="icon" title="Change Path"
+								@click="openSaveFolderPicker">
+							&#xf139;
+						</button>
+					</td>
+				</tr>
+				<tr>
+					<td class="form-label">File Name</td>
+					<td><input type="text" v-model="saveFileDialog.fileName"></td>
+				</tr>
+				<tr>
+					<td class="form-label">Length</td>
+					<td class="form-value">{{saveFileDialog.track.getLengthAsString()}}</td>
+				</tr>
+			</table>
+			<!-- while saving -->
 			<div v-if="saveFileDialog.isSaving">
-				File is written on disk, please wait...
+				Track is written on disk, please wait...
 			</div>
+			<!-- after saving -->
+			<div v-else-if="saveFileDialog.finishedSaving">
+				Successfully finished!
+				&nbsp;
+				<button class="form-button" @click="saveFileDialog.visible=false">OK</button>
+			</div>
+			<!-- before saving -->
 			<div v-else>
-				<div>Successfully finished!</div>
-				<div><button class="form-button" @click="saveFileDialog.visible=false">OK</button></div>
+				<button class="form-button" @click="saveFileDialog.visible=false">Cancel</button>
+				<button class="form-button" @click="saveTrack()">Save Track</button>
 			</div>
 		</div>
 

@@ -364,6 +364,16 @@ div.overlay td.form-label {
 	text-align: right;
 	font-size: 18px;
 	font-weight: bold;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+div.overlay td.form-value {
+	text-align: left;
+	font-family: 'Dosis', sans-serif;
+	font-size: 14px;
+	overflow: hidden;
+	white-space: nowrap;
 }
 
 div.overlay input[type=text] {

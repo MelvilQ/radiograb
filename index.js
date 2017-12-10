@@ -40,7 +40,10 @@ new Vue({
 		},
 		saveFileDialog: {
 			visible: false,
-			isSaving: false
+			track: null,
+			fileName: null,
+			isSaving: false,
+			finishedSaving: false
 		}
 	},
 	computed: {
@@ -96,6 +99,16 @@ new Vue({
 				height: Math.round(this.selectedStation.recorder.duration * this.timelineScale) + 'px',
 				startTime: moment(block.start).format('D.M.YYYY H:mm')
 			});
+		},
+		saveFolderDisplay: function(){
+			let path = this.settings.saveFolder;
+			if(!path){
+				return '';
+			}
+			if (path.length > 40){
+				path = path.substr(0, 20) + '...' + path.substr(path.length - 20, 20);
+			}
+			return path;
 		}
 	},
 	methods: {
@@ -223,14 +236,25 @@ new Vue({
 			this.settings.saveFolder = folder;
 			this.settingsManager.saveSettings();
 		},
-		saveTrack: async function(track){
-			if(!this.settings.saveFolder || !this.settings.saveFolder.length){
+		openSaveFileDialog: function(track){
+			this.saveFileDialog.visible = true;
+			this.saveFileDialog.track = track;
+			this.saveFileDialog.fileName = track.artist + ' - ' + track.title 
+				+ '.' + this.selectedStation.stream.format;
+			this.saveFileDialog.isSaving = false;
+			this.saveFileDialog.finishedSaving = false;
+		},
+		saveTrack: async function(){
+			const track = this.saveFileDialog.track;
+			if(!track || !this.settings.saveFolder || !this.settings.saveFolder.length){
 				return;
 			}
-			this.saveFileDialog.visible = true;
 			this.saveFileDialog.isSaving = true;
-			await this.trackCutter.saveTrack(track, this.selectedStation, this.settings.saveFolder);
+			this.saveFileDialog.finishedSaving = false;
+			await this.trackCutter.saveTrack(track, this.selectedStation, 
+				this.settings.saveFolder, this.saveFileDialog.fileName);
 			this.saveFileDialog.isSaving = false;
+			this.saveFileDialog.finishedSaving = true;
 			track.saved = true;
 			this.selectedStation.trackListManager.saveTracks();
 		},
