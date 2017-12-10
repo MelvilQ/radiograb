@@ -91,6 +91,6 @@
             "url": "https://br-brklassik-live.sslcast.addradio.de/br/brklassik/live/mp3/128/stream.mp3",
             "format": "mp3"
         },
-        "recording": true
+        "recording": false
     }
 ]

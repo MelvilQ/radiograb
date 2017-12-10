@@ -19,6 +19,7 @@
         "mp3-duration": "^1.1.0",
         "open": "^0.0.5",
         "request": "^2.83.0",
+        "typeface-dosis": "^0.0.44",
         "typeface-rajdhani": "^0.0.44",
         "vue": "^2.5.2"
     },

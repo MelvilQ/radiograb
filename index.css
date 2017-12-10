@@ -146,6 +146,8 @@ table.tracklist-body {
 	max-height: calc(100vh - 182px);
 	overflow-x: hidden;
 	overflow-y: auto;
+	font-family: 'Dosis', sans-serif;
+	font-size: 18px;
 }
 
 table.tracklist-head tbody, table.tracklist-body tbody {
@@ -211,6 +213,10 @@ td.action-column {
 	padding-right: 18px;
 }
 
+table.tracklist-body td.length-column, table.tracklist-body td.time-column {
+	letter-spacing: 1px;
+}
+
 div.timeline-area {
 	position: relative;
 	width: 100%;
@@ -258,6 +264,7 @@ div.timeline-track {
 	padding: 0 30px; 
 	line-height: 2;
 	width: calc(100% - 160px);
+	font-family: 'Dosis', sans-serif;
 	font-size: 18px;
 	background-color: #99bbcc;
 	color: black;
