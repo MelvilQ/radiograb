@@ -190,23 +190,23 @@ div.tracklist-area td {
 	cursor: pointer;
 }
 
-td.artist-column {
+div.tracklist-area td.artist-column {
 	width: 33%;
 }
 
-td.title-column {
+div.tracklist-area td.title-column {
 	width: 33%;
 }
 
-td.length-column {
+div.tracklist-area td.length-column {
 	width: 6%;
 }
 
-td.time-column {
+div.tracklist-area td.time-column {
 	width: 10%;
 }
 
-td.action-column {
+div.tracklist-area td.action-column {
 	width: 11%;
 	font-size: 0;
 	text-align: right;
