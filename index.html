@@ -279,16 +279,13 @@
 						</td>
 					</tr>
 				</table>
-				<br>
 				<div>
-					<button class="cancel" 
-							type="button" 
+					<button class="form-button cancel" type="button" 
 							@click="cancelNewTrackDialog">
 						Cancel
 					</button>
 					&nbsp; &nbsp;
-					<button class="ok" 
-							type="submit" 
+					<button class="form-button ok" type="submit" 
 							:disabled="!newTrackDialog.artist || !newTrackDialog.title">
 						OK
 					</button>
@@ -331,22 +328,18 @@
 						</td>
 					</div>
 				</table>
-				<br>
 				<div>
-					<button class="cancel" 
-							type="button" 
+					<button class="form-button cancel" type="button" 
 							@click="cancelEditTrackDialog">
 						Cancel
 					</button>
 					&nbsp; &nbsp;
-					<button class="delete"
-							type="button"
+					<button class="form-button delete" type="button"
 							@click="deleteEditedTrack">
 						Delete Track
 					</button>
 					&nbsp; &nbsp;
-					<button class="ok" 
-							type="submit"
+					<button class="form-button ok" type="submit"
 							:disabled="!editTrackDialog.artist || !editTrackDialog.title">
 						OK
 					</button>
@@ -363,7 +356,7 @@
 			</div>
 			<div v-else>
 				<div>Successfully finished!</div>
-				<div><button @click="saveFileDialog.visible=false">OK</button></div>
+				<div><button class="form-button" @click="saveFileDialog.visible=false">OK</button></div>
 			</div>
 		</div>
 

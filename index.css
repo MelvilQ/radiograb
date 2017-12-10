@@ -351,6 +351,7 @@ div.overlay button.close {
 
 div.overlay table.form-table {
 	margin: 0 auto;
+	padding-bottom: 10px;
 }
 
 div.overlay h3 {
@@ -391,6 +392,10 @@ div.overlay input[type=number] {
 div.overlay input[type=number]:focus {
 	outline: none;
 	background-color: #99bbcc;
+}
+
+div.overlay button.form-button {
+	width: 120px;
 }
 
 div.track-editor.overlay {
