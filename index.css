@@ -181,7 +181,7 @@ table.tracklist-body tr.selected {
 	font-weight: bold;
 }
 
-td {
+div.tracklist-area td {
 	display: inline-block;
 	padding: 1px 6px;
 	text-align: left;
@@ -338,7 +338,8 @@ div.overlay {
 	z-index: 17;
 	border: 2px solid black;
 	border-top: 30px solid black;
-	background-color: white;
+	background-color: #242c30;
+	color: white;
 	text-align: center;
 }
 
@@ -346,6 +347,50 @@ div.overlay button.close {
 	position: absolute;
 	top: -28px;
 	right: 2px;
+}
+
+div.overlay table.form-table {
+	margin: 0 auto;
+}
+
+div.overlay h3 {
+	margin-top: 15px;
+	margin-bottom: 10px;
+}
+
+div.overlay td.form-label {
+	padding-right: 10px;
+	text-align: right;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+div.overlay input[type=text] {
+	width: 200px;
+	height: 29px;
+	border: none;
+	padding: 0 4px;
+	font-family: 'Dosis', sans-serif;
+	font-size: 14px;
+}
+
+div.overlay input[type=text]:focus {
+	outline: none;
+	background-color: #99bbcc;
+}
+
+div.overlay input[type=number] {
+	width: 162px;
+	height: 29px;
+	border: none;
+	padding: 0 4px;
+	font-family: 'Dosis', sans-serif;
+	font-size: 14px;
+}
+
+div.overlay input[type=number]:focus {
+	outline: none;
+	background-color: #99bbcc;
 }
 
 div.track-editor.overlay {

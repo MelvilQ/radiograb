@@ -70,6 +70,7 @@
 			</div>
 		</div>
 
+		<!-- station picker -->
 		<div class="station-picker">
 			<div class="station-box" v-for="station in stations" 
 				 :class="{selected: selectedStation === station}"
@@ -78,7 +79,8 @@
 					 :class="{inactive: !station.recording}">				
 			</div>
 		</div>
-				
+		
+		<!-- tracklist -->
 		<div class="tracklist-area" v-if="selectedStation" v-show="displayMode === 'tracklist'">
 			<div v-if="tracks && tracks.length">
 				<table class="tracklist-head">
@@ -247,28 +249,36 @@
 			<button class="icon minimal-icon close" @click="cancelNewTrackDialog">&#xf129;</button>
 			<h3>Add Track</h3>
 			<form @submit.prevent="submitNewTrackDialog">
-				<div><label>Artist</label>
-					<input type="text" v-model="newTrackDialog.artist">
-				</div>
-				<div><label>Title</label>
-					<input type="text" v-model="newTrackDialog.title">
-				</div>
-				<div>
-					<label>Start</label>
-					<input type="number" step="0.1" v-model="newTrackDialog.start">
-					<button type="button" 
-							@click="testCut(newTrackDialog.take, newTrackDialog.start)">
-						Test
-					</button>
-				</div>
-				<div>
-					<label>End</label>
-					<input type="number" step="0.1" v-model="newTrackDialog.end">
-					<button type="button" 
-							@click="testCut(newTrackDialog.take, newTrackDialog.end)">
-						Test
-					</button>
-				</div>
+				<table class="form-table">
+					<tr>
+						<td class="form-label"><label>Artist</label></td>
+						<td><input type="text" v-model="newTrackDialog.artist"></td>
+					</tr>
+					<tr>
+						<td class="form-label"><label>Title</label></td>
+						<td><input type="text" v-model="newTrackDialog.title"></td>
+					</tr>
+					<tr>
+						<td class="form-label"><label>Start</label></td>
+						<td>
+							<input type="number" step="0.1" v-model="newTrackDialog.start">
+							<button type="button" class="icon"
+									@click="testCut(newTrackDialog.take, newTrackDialog.start)">
+								&#xf140;
+							</button>
+						</td>
+					</tr>
+					<tr>
+						<td class="form-label"><label>End</label></td>
+						<td>
+							<input type="number" step="0.1" v-model="newTrackDialog.end">
+							<button type="button" class="icon"
+									@click="testCut(newTrackDialog.take, newTrackDialog.end)">
+								&#xf140;
+							</button>
+						</td>
+					</tr>
+				</table>
 				<br>
 				<div>
 					<button class="cancel" 
@@ -291,28 +301,36 @@
 			<button class="icon minimal-icon close" @click="cancelEditTrackDialog">&#xf129;</button>
 			<h3>Edit Track</h3>
 			<form @submit.prevent="submitEditTrackDialog">
-				<div><label>Artist</label>
-					<input type="text" v-model="editTrackDialog.artist">
-				</div>
-				<div><label>Title</label>
-					<input type="text" v-model="editTrackDialog.title">
-				</div>
-				<div>
-					<label>Start</label>
-					<input type="number" step="0.1" v-model="editTrackDialog.start">
-					<button type="button" 
-							@click="testCut(editTrackDialog.track.take, editTrackDialog.start)">
-						Test
-					</button>
-				</div>
-				<div>
-					<label>End</label>
-					<input type="number" step="0.1" v-model="editTrackDialog.end">
-					<button type="button" 
-							@click="testCut(editTrackDialog.track.take, editTrackDialog.end)">
-						Test
-					</button>
-				</div>
+				<table class="form-table">
+					<tr>
+						<td class="form-label"><label>Artist</label></td>
+						<td><input type="text" v-model="editTrackDialog.artist"></td>
+					</tr>
+					<tr>
+						<td class="form-label"><label>Title</label></td>
+						<td><input type="text" v-model="editTrackDialog.title"></td>
+					</tr>
+					<tr>
+						<td class="form-label"><label>Start</label></td>
+						<td>
+							<input type="number" step="0.1" v-model="editTrackDialog.start">
+							<button type="button" class="icon"
+									@click="testCut(editTrackDialog.track.take, editTrackDialog.start)">
+								&#xf140;
+							</button>
+						</td>
+					</tr>
+					<tr>
+						<td class="form-label"><label>End</label></td>
+						<td>
+							<input type="number" step="0.1" v-model="editTrackDialog.end">
+							<button type="button" class="icon"
+									@click="testCut(editTrackDialog.track.take, editTrackDialog.end)">
+								&#xf140;
+							</button>
+						</td>
+					</div>
+				</table>
 				<br>
 				<div>
 					<button class="cancel" 
