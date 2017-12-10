@@ -54,6 +54,9 @@ class Recorder {
 	}
 
 	checkSongInfo() {
+		if (!this.station.songInfo || this.station.songInfo.method !== 'http' || !this.station.songInfo.url){
+			return;
+		}
 		request({url: this.station.songInfo.url, json: true}, (err, res, body) => {
 			const artist = jpath.resolve(body, this.station.songInfo.tags.artist)[0];
 			const title = jpath.resolve(body, this.station.songInfo.tags.title)[0];

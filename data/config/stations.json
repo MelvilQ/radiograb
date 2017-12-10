@@ -83,5 +83,14 @@
             }
         },
         "recording": false
+    },
+    {
+        "name": "BR Klassik",
+        "logo": "http://www.br.de/static/radioplayer/img/logos/logo_br_klassik.png?v=1.9",
+        "stream": {
+            "url": "https://br-brklassik-live.sslcast.addradio.de/br/brklassik/live/mp3/128/stream.mp3",
+            "format": "mp3"
+        },
+        "recording": true
     }
 ]

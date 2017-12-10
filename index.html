@@ -268,12 +268,14 @@
 						Test
 					</button>
 				</div>
+				<br>
 				<div>
 					<button class="cancel" 
 							type="button" 
 							@click="cancelNewTrackDialog">
 						Cancel
 					</button>
+					&nbsp; &nbsp;
 					<button class="ok" 
 							type="submit" 
 							:disabled="!newTrackDialog.artist || !newTrackDialog.title">
@@ -310,17 +312,20 @@
 						Test
 					</button>
 				</div>
+				<br>
 				<div>
 					<button class="cancel" 
 							type="button" 
 							@click="cancelEditTrackDialog">
 						Cancel
 					</button>
+					&nbsp; &nbsp;
 					<button class="delete"
 							type="button"
 							@click="deleteEditedTrack">
 						Delete Track
 					</button>
+					&nbsp; &nbsp;
 					<button class="ok" 
 							type="submit"
 							:disabled="!editTrackDialog.artist || !editTrackDialog.title">

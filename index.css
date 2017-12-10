@@ -106,12 +106,12 @@ div.station-box:hover {
 	cursor: pointer;	
 }
 
-div.station-box.active {
+div.station-box:active {
 	background-color: white;
 }
 
 div.station-box.selected {
-	background-color: black;
+	background-color: #99bbcc;
 }
 
 img.logo {
@@ -342,7 +342,7 @@ div.overlay button.close {
 
 div.track-editor.overlay {
 	width: 500px;
-	height: 300px;
+	height: 250px;
 }
 
 div.save-file.overlay {
