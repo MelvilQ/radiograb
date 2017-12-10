@@ -246,13 +246,14 @@ new Vue({
 		},
 		saveTrack: async function(){
 			const track = this.saveFileDialog.track;
-			if(!track || !this.settings.saveFolder || !this.settings.saveFolder.length){
+			const fileName = this.saveFileDialog.fileName.replace(/\//g, '');
+			if(!track || !fileName || !this.settings.saveFolder || !this.settings.saveFolder.length){
 				return;
 			}
 			this.saveFileDialog.isSaving = true;
 			this.saveFileDialog.finishedSaving = false;
 			await this.trackCutter.saveTrack(track, this.selectedStation, 
-				this.settings.saveFolder, this.saveFileDialog.fileName);
+				this.settings.saveFolder, fileName);
 			this.saveFileDialog.isSaving = false;
 			this.saveFileDialog.finishedSaving = true;
 			track.saved = true;
