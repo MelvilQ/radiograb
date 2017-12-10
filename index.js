@@ -120,6 +120,9 @@ new Vue({
 		showTimeline: function(){
 			this.displayMode = 'timeline';
 			this.settingsManager.setDisplayMode('timeline');
+			setTimeout(() => document.getElementById('timeline-arrow').scrollIntoView(false, {
+				behavior: 'smooth', block: 'start'
+			}), 0);
 		},
 		showTracklist: function(){
 			this.displayMode = 'tracklist';

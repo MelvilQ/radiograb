@@ -182,15 +182,15 @@
 					</div>
 					<!-- block arrow -->
 					<div v-if="audioPlayer.audio && audioPlayer.file === liveBlock.file" 
-						 class="timeline-arrow"
+						 class="timeline-arrow" id="timeline-arrow"
 						 :style="{bottom: arrowPosition}">
-				   		<span>&nbsp;{{currentPlayingTime}}&nbsp;</span>
+				   		<span id="timeline-arrow">&nbsp;{{currentPlayingTime}}&nbsp;</span>
 					</div>
 					<!-- live arrow -->
 					<div v-if="audioPlayer.audio && audioPlayer.mode === 'live'" 
 					 	 class="timeline-arrow"
 						 :style="{top: '0px'}">
-						<span>&nbsp;{{currentPlayingTime}}&nbsp;</span>
+						<span id="timeline-arrow">&nbsp;{{currentPlayingTime}}&nbsp;</span>
 					</div>
 				</div>
 				<div class="timeline-block-start">
@@ -226,9 +226,9 @@
 					</div>
 					<!-- arrow -->
 					<div v-if="audioPlayer.audio && audioPlayer.file === block.file" 
-						 class="timeline-arrow"
+						 class="timeline-arrow" 
 						 :style="{bottom: arrowPosition}">
-						<span>&nbsp;{{currentPlayingTime}}&nbsp;</span>
+						<span id="timeline-arrow">&nbsp;{{currentPlayingTime}}&nbsp;</span>
 					</div>
 				</div>
 				<div class="timeline-block-start">
