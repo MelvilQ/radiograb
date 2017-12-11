@@ -1,10 +1,10 @@
 const fs = require('fs-extra');
+const mkdirp = require('mkdirp-promise');
 const constants = require('./constants');
 
 class SettingsManager {
 
 	constructor(){
-		this.settings = {};
 		this.loadSettings();
 	}
 
@@ -13,7 +13,13 @@ class SettingsManager {
 			const json = fs.readFileSync(constants.settingsFile);
 			this.settings = JSON.parse(json);
 		} catch(e){
-			console.log('no settings.json for station ' + this.name);
+			console.log('no settings.json, using defaults');
+			this.settings = {
+				volume: 80,
+				displayMode: 'timeline',
+				saveFolder: '',
+				timelineScale: 0.5
+			};
 		}
 	}
 
@@ -38,6 +44,7 @@ class SettingsManager {
 	}
 
 	async saveSettings(){
+		await mkdirp(constants.configFolder);
 		await fs.writeFile(constants.settingsFile, JSON.stringify(this.settings, null, 4));
 	}
 }
