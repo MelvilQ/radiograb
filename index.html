@@ -217,9 +217,13 @@
 							:style="{height: track.height, bottom: track.bottom}"
 							@click.stop="selectTrackAndPlay(track)"
 							@contextmenu.stop.prevent="openEditTrackDialog(track.ref)">
-						<span v-if="parseInt(track.height) > 24">
+						<span v-if="parseInt(track.height) > 30">
 							{{track.artist}} - {{track.title}}
 						</span>
+						<img class="symbol" title="Save" 
+							 v-if="parseInt(track.height) > 30"
+							 @click.stop="openSaveFileDialog(track.ref)"
+							 src="img/save.svg">
 					</div>
 					<!-- arrow -->
 					<div v-if="audioPlayer.audio && audioPlayer.file === block.file" 

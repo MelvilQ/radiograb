@@ -277,6 +277,12 @@ div.timeline-track.edited {
 	font-weight: bold;
 }
 
+div.timeline-track img.symbol {
+	position: absolute;
+	right: 5px;
+	top: 5px;
+}
+
 div.timeline-arrow {
 	position: absolute;
 	margin-left: -70px;
