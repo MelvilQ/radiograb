@@ -78,6 +78,7 @@
 				<img class="logo" :src="station.logo" :title="station.name"
 					 :class="{inactive: !station.recording}">				
 			</div>
+			<button class="new-button" @click="openNewStationDialog">&#xf216;</button>
 		</div>
 		
 		<!-- tracklist -->
@@ -243,6 +244,39 @@
 			<div class="message">
 				Select a station!
 			</div>
+		</div>
+
+		<!-- new station dialog -->
+		<div class="station-editor overlay" v-if="newStationDialog.visible">
+			<button class="icon minimal-icon close" @click="cancelNewStationDialog">&#xf129;</button>
+			<h3>Add Station</h3>
+			<form @submit.prevent="submitNewStationDialog">
+				<table class="form-table">
+					<tr>
+						<td class="form-label"><label>Station Name</label></td>
+						<td><input type="text" v-model="newStationDialog.name"></td>
+					</tr>
+					<tr>
+						<td class="form-label"><label>Stream Url</label></td>
+						<td><input type="text" v-model="newStationDialog.streamUrl"></td>
+					</tr>
+					<tr>
+						<td class="form-label"><label>Logo Url</label></td>
+						<td><input type="text" v-model="newStationDialog.logoUrl"></td>
+					</tr>
+				</table>
+				<div>
+					<button class="form-button cancel" type="button" 
+							@click="cancelNewStationDialog">
+						Cancel
+					</button>
+					&nbsp; &nbsp;
+					<button class="form-button ok" type="submit" 
+							:disabled="!newStationDialog.name || !newStationDialog.streamUrl || !newStationDialog.logoUrl">
+						OK
+					</button>
+				</div>
+			</form>
 		</div>
 
 		<!-- new track dialog -->

@@ -10,7 +10,7 @@ function createWindow(){
 	mainWindow = new BrowserWindow({
 		icon: './img/app-icon.png',
 		title: 'RadioGrab', 
-		backgroundColor: '#4682b4'
+		backgroundColor: '#5f747f'
 	});
 	mainWindow.maximize();
 

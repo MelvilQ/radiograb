@@ -95,6 +95,14 @@ div.station-picker::before, div.station-picker::after {
 	content: '';
 }
 
+div.station-picker button.new-button {
+	margin: 20px 10px;
+	height: 40px;
+	width: 40px;
+	font-family: 'Ionicons';
+	font-size: 30px;
+}
+
 div.station-box {
 	flex-shrink: 0;
 	margin: 10px;
@@ -279,7 +287,7 @@ div.timeline-track.edited {
 
 div.timeline-track img.symbol {
 	position: absolute;
-	right: 5px;
+	right: 25px;
 	top: 5px;
 }
 
@@ -412,6 +420,11 @@ div.overlay input[type=number]:focus {
 
 div.overlay button.form-button {
 	width: 120px;
+}
+
+div.station-editor.overlay {
+	width: 500px;
+	height: 200px;
 }
 
 div.track-editor.overlay {

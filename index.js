@@ -21,6 +21,12 @@ new Vue({
 		sortColumn: 'time',
 		sortOrder: 'desc',
 		timelineScale: 1.0,
+		newStationDialog: {
+			visible: false,
+			name: null,
+			streamUrl: null,
+			logoUrl: null
+		},
 		newTrackDialog: {
 			visible: false,
 			artist: null,
@@ -118,6 +124,23 @@ new Vue({
 			if(this.audioPlayer.isPlaying){
 				this.playSomethingOfNewStation();
 			}
+		},
+		openNewStationDialog: function(){
+			this.newStationDialog.visible = true;
+			this.newStationDialog.name = '';
+			this.newStationDialog.streamUrl = '';
+			this.newStationDialog.logoUrl = '';
+		},
+		submitNewStationDialog: function(){
+			this.stationManager.addStation(
+				this.newStationDialog.name,
+				this.newStationDialog.streamUrl,
+				this.newStationDialog.logoUrl
+			);
+			this.newStationDialog.visible = false;
+		},
+		cancelNewStationDialog: function(){
+			this.newStationDialog.visible = false;
 		},
 		playSomethingOfNewStation: function(){
 			if(this.audioPlayer.mode === 'live' && this.selectedStation.recording){
