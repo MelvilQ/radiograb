@@ -4,13 +4,13 @@ RadioGrab is a desktop app to record radio stations. It shows a list of the coll
 
 ## Screenshots
 
-<img src="doc/screenshot1.png" width="800px">
+<img src="doc/screenshot1.png">
 
-<img src="doc/screenshot2.png" width="800px">
+<img src="doc/screenshot2.png">
 
-<img src="doc/screenshot3.png" width="800px">
+<img src="doc/screenshot3.png">
 
-<img src="doc/screenshot4.png" width="800px">
+<img src="doc/screenshot4.png">
 
 ## Motivation
 
