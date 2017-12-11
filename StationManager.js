@@ -36,6 +36,23 @@ class StationManager {
 		});
 	}
 
+	addStation(name, streamUrl, logoUrl) {
+		const station = {name};
+		station.recording = false;
+		station.stream = {url: streamUrl, format: 'mp3'};
+		if(logoUrl){
+			station.logo = logoUrl;
+		}
+
+		station.trackListManager = new TrackListManager(station.name);
+		station.blocksManager = new BlocksManager(station.name, station.stream.format);
+		station.blocksManager.synchronizeBlocks();
+		station.recorder = new Recorder(station);
+
+		this.stations.push(station);
+		this.saveStations();
+	}
+
 	async saveStations() {
 		await mkdirp(constants.configFolder);
 
