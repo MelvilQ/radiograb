@@ -6,7 +6,10 @@
     "main": "main.js",
     "scripts": {
         "start": "electron .",
-        "buildall": "electron-packager --overwrite --no-prune ."
+        "build": "electron-packager --overwrite --no-prune --out dist --platform=linux,win32,darwin .",
+        "build-linux": "electron-packager --overwrite --no-prune --out dist --platform=linux .",
+        "build-win": "electron-packager --overwrite --no-prune --out dist --platform=win32 .",
+        "build-mac": "electron-packager --overwrite --no-prune --out dist --platform=darwin ."
     },
     "dependencies": {
         "child-process-promise": "^2.2.1",
@@ -25,7 +28,7 @@
     },
     "devDependencies": {
         "babel-eslint": "^8.0.1",
-        "electron": "1.7.9",
+        "electron": "^1.7.9",
         "electron-packager": "^9.1.0"
     }
 }
