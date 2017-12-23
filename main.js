@@ -8,17 +8,21 @@ let mainWindow;
 
 function createWindow(){
 	mainWindow = new BrowserWindow({
-		icon: './img/app-icon.png',
+		icon: path.join(__dirname, 'img', 'app-icon.png'),
 		title: 'RadioGrab', 
 		backgroundColor: '#5f747f'
 	});
 	mainWindow.maximize();
+	console.log('main window created');
 
 	mainWindow.loadURL(url.format({
 		pathname: path.join(__dirname, 'index.html'),
 		protocol: 'file:',
 		slashes: true
 	}));
+	console.log('index.html loaded');
+
+	mainWindow.toggleDevTools();
 
 	mainWindow.on('closed', function () {
 		mainWindow = null;
